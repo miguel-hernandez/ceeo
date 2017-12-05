@@ -14,6 +14,8 @@
   <link href="<?php echo base_url('assets/sweetalert2/sweetalert2.min.css'); ?>" rel="stylesheet" media="screen">
   <link href="<?php echo base_url('assets/css/estilos-master.css'); ?>" rel="stylesheet" media="screen">
   <link href="<?php echo base_url('assets/css/font-awesome.min.css'); ?>" rel="stylesheet" media="screen">
+  <link href="<?php echo base_url('assets/css/header.css'); ?>" rel="stylesheet" media="screen">
+
 
   <script src="<?php echo base_url('assets/jquery-3.2.1.min.js'); ?>"></script>
   <script src="<?php echo base_url('assets/jquery.validate.js'); ?>"></script>
@@ -34,5 +36,51 @@
 
 </head>
 
+
+
 <body>
-<center>HEADER</center>
+  <!-- Header Logo -->
+  <div class="headerlogo">
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+          <h4>CEEO</h4>
+        </div>
+
+        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+            <div class="pull-right">
+              <img src="" alt="">
+            </div>
+        </div>
+      </div><!-- row -->
+    </div>
+  </div>
+  <!-- Header Logo END -->
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#NavComponents" aria-expanded="false">
+          <i class="fa fa-bars"></i>
+        </button>
+      </div>
+
+      <div class="collapse navbar-collapse navbar_master" id="NavComponents">
+        <!-- Navbar Links -->
+        <ul class="nav navbar-nav navbar-left">
+
+          <li class="dropdown">
+            <a href="<?php echo site_url(''); ?>"  aria-haspopup="true" aria-expanded="false"><i class="fa fa-user-circle-o"></i>INICIO</a>
+          </li>
+
+          <li>
+            <a href="<?php echo site_url(''); ?>" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-television"></i> Consultas y Registros </a>
+          </li>
+          <li>
+            <a href="<?php echo site_url(''); ?>" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-power-off"></i> Logout</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <!-- NAVBAR END -->
