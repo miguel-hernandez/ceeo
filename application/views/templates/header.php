@@ -22,7 +22,7 @@
 
   <script src="<?php echo base_url('assets/js/utils/messages.js'); ?>"></script>
   <script src="<?php echo base_url('assets/js/utils/design.js'); ?>"></script>
-  <script src="<?php echo base_url('assets/js/utils/table/table.js'); ?>"></script>
+  <script src="<?php echo base_url('assets/js/utils/tablejs/table.js'); ?>"></script>
 
 
   <script type="text/javascript">
