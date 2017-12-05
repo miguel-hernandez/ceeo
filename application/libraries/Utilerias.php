@@ -6,6 +6,9 @@ define('DATOSUSUARIO', "datos_usuario_ceeo");
 define('UVISITADOR', 1);
 define('UCOORDINADOR', 2);
 define('UADMINISTRADOR', 3);
+define('MESSAGEREQUEST', 'message_request');
+define('SUCCESMESSAGE', '1');
+define('ERRORMESSAGE', '2');
 
 class Utilerias{
 		public function __construct() {
@@ -52,6 +55,28 @@ class Utilerias{
 	        }
 	        return true;
 	    }// verifica_sesion_redirige()
+
+	    public static function get_notification_alert($mensaje, $tipo, $cerrar = TRUE) {
+	            $type = "alert-info";
+
+              switch ($tipo) {
+                  case SUCCESMESSAGE:
+                      $type = "alert-success ";
+                      break;
+                  case ERRORMESSAGE:
+                      $type = "alert-danger ";
+                      break;
+              }
+
+							return "
+									<div class='alert ".$type." alert-dismissable'>
+										<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>
+										<center><strong>".$mensaje."</strong></center>
+									</div>
+							";
+
+
+	    }// crea_html_mensaje
 
 	}
 ?>

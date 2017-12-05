@@ -15,30 +15,6 @@ class Index extends CI_Controller {
 		// Utilerias::pagina_basica($this, "index", $data);
 	}// index()
 
-	function direcciona_user($tipo_usuario){
-		switch ($tipo_usuario) {
-			case UVISITADOR:
-				# code...
-				redirect('visitador/index');
-				break;
-
-			case UCOORDINADOR:
-				# code...
-				redirect('coordinador/index');
-				break;
-
-			case UADMINISTRADOR:
-				# code...
-				redirect('administrador/index');
-				break;
-			
-			default:
-				# code...
-				$data = $this->data;
-            	$data['login_failed'] = TRUE;
-            	$this->load->view('login',$data); 
-				break;
-		}
-	}
+	
 
 }// class

@@ -77,7 +77,7 @@
             <a href="<?php echo site_url(''); ?>" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-television"></i> Consultas y Registros </a>
           </li>
           <li>
-            <a href="<?php echo site_url(''); ?>" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-power-off"></i> Logout</a>
+            <a href="<?php echo site_url('Login/logout'); ?>" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-power-off"></i> Logout</a>
           </li>
         </ul>
       </div>
