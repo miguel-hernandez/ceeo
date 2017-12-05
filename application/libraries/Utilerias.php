@@ -1,6 +1,12 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
+define('DATOSUSUARIO', "datos_usuario_ceeo");
+
+define('UVISITADOR', 1);
+define('UCOORDINADOR', 2);
+define('UADMINISTRADOR', 3);
+
 class Utilerias{
 		public function __construct() {
 	        //  require_once APPPATH.'third_party/Utils.php';
