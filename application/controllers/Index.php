@@ -11,22 +11,23 @@ class Index extends CI_Controller {
 	public function index()
 	{
 		$data["titulo"] = "index";
-		Utilerias::pagina_basica($this, "index", $data);
+		$this->direcciona_user(3);
+		// Utilerias::pagina_basica($this, "index", $data);
 	}// index()
 
 	function direcciona_user($tipo_usuario){
 		switch ($tipo_usuario) {
-			case :''
+			case UVISITADOR:
 				# code...
 				redirect('visitador/index');
 				break;
 
-			case '2':
+			case UCOORDINADOR:
 				# code...
 				redirect('coordinador/index');
 				break;
 
-			case '3':
+			case UADMINISTRADOR:
 				# code...
 				redirect('administrador/index');
 				break;

@@ -11,7 +11,9 @@ class Coordinador extends CI_Controller {
 
 	public function index()
 	{
-      if(Utilerias::verifica_sesion_redirige($this)){
+      // if(Utilerias::verifica_sesion_redirige($this)){
+      if(1==1){
+        $data= array();
         Utilerias::pagina_basica($this, "coordinador/index", $data);
       }
 	}
