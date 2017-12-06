@@ -17,7 +17,7 @@ $("#btn_visitador_mostrar").click(function(e){
         obj_message.notification("","La CCT aún no tiene visitas","error");
       }else{
         var rv = new Reportevisitas();
-        rv.read(arr_row[0]["id"]);
+        rv.read(arr_row[0]);
       }
     }
 });
@@ -92,7 +92,12 @@ function Reportevisitas(){
     that_reportevisitas.idmodal = "";
     that_reportevisitas.controlador = "Visitador";
 
-    this.read = function(idcct){
+    this.read = function(arr_cct){
+      var idcct = arr_cct["id"];
+      var cct = arr_cct["cct"];
+      var nombre_ct = arr_cct["nombre_ct"];
+      var turno = arr_cct["turno"];
+
       console.info("Reportevisitas -> read() idcct");
           console.info(idcct);
           var ruta = base_url+that_reportevisitas.controlador+"/reportevisitas";
@@ -107,6 +112,9 @@ function Reportevisitas(){
           })
           .done(function( data ) {
             swal.close();
+            $("#lbl_reportevisitas_nombrect").empty();
+            $("#lbl_reportevisitas_nombrect").append("Escuela: "+nombre_ct+" ("+cct+" / "+turno+")");
+
             var arr_datos = data.result;
             var arr_columnas = data.columnas;
             obj_grid_rv = new Grid(
