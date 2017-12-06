@@ -28,7 +28,11 @@ class Aplicar_model extends CI_Model {
 
      function get_datos_visitadas($idcct,$idvisitador)
      {
-       $str_query = " SELECT ap.idaplicar AS id, 1 AS folio, ap.fcreacion AS fecha, 'PENDIENTE' AS atendio
+       $str_query = " SELECT ap.idaplicar AS id, ap.idaplicar AS folio, ap.fcreacion AS fecha,
+       CASE ap.atendio
+       WHEN 1 THEN 'DOCENTE'
+       WHEN 2 THEN 'DIRECTOR'
+       END atendio
                       FROM aplicar ap
                       WHERE ap.idcct = {$idcct} AND  ap.idusuario = {$idvisitador}
           ";

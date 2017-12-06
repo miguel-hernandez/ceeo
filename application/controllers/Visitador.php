@@ -33,7 +33,7 @@ class Visitador extends CI_Controller {
       $usuario = $this->session->userdata[DATOSUSUARIO];
       $result = $this->Visit_cct_model->get_datos($usuario["idusuario"]);
       $result2 = $result;
-      $arr_columnas = array("id","nvisitas","cct","nombre_ct","nombre_nivel","nombre_modalidad","domicilio");
+      $arr_columnas = array("id","nvisitas","cct","nombre_ct","turno", "nombre_nivel","nombre_modalidad","domicilio");
 
       $array_aux = array();
       $array_pd = array();

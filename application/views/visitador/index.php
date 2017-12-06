@@ -60,6 +60,12 @@
       <div class="modal-body">
 
         <div class="row">
+          <center>
+          <label id="lbl_reportevisitas_nombrect"></label>
+        </center>
+        </div><!-- row -->
+
+        <div class="row margintop10">
           <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
             <button id="" type="button" class="btn btn-primary btn-block">Editar</button>
           </div>
