@@ -16,5 +16,18 @@ class Visit_cct_model extends CI_Model {
        return $this->db->query($str_query)->result_array();
      }// get_asignadas()
 
+     function get_datos($idvisitador)
+     {
+       $str_query = " SELECT ct.idcct as id, 1 AS nvisitas, ct.cct, ct.nombre_ct, n.nombre_nivel, m.nombre_modalidad,ct.domicilio
+                      FROM visit_cct vc
+                      INNER JOIN usuario us ON us.idusuario = vc.idvisitador
+                      INNER JOIN cct ct ON ct.idcct = vc.idcct
+                      INNER JOIN nivel n ON n.id_nivel = ct.idnivel
+                      INNER JOIN modalidad m ON m.id_modalidad = ct.idmodalidad
+                      WHERE vc.idvisitador = {$idvisitador}
+          ";
+          // echo $str_query; die();
+       return $this->db->query($str_query)->result_array();
+     }// get_asignadas()
 
 }

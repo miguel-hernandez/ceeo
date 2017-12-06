@@ -8,7 +8,6 @@ class Visitador extends CI_Controller {
         $this->load->library('Utilerias');
         $this->load->model('Visit_cct_model');
         $this->load->model('Aplicar_model');
-
     }
 
 
@@ -16,6 +15,7 @@ class Visitador extends CI_Controller {
 	{
       if(Utilerias::verifica_sesion_redirige($this)){
         $data["titulo"] = "VISITADOR";
+
 
         $usuario = $this->session->userdata[DATOSUSUARIO];
 			  $result = $this->Visit_cct_model->get_asignadas($usuario["idusuario"]);
@@ -29,9 +29,28 @@ class Visitador extends CI_Controller {
         $data["visitadas"] = $result2[0]["visitadas"];
         $data["sin_visitar"] = $result[0]["asignadas"] - $result2[0]["visitadas"];
         $data["total_visitas"] = $result3[0]["total_visitadas"];
+        $data["total_visitas"] = $result3[0]["total_visitadas"];
         Utilerias::pagina_basica($this, "visitador/index", $data);
       }
-	}
+	}//
+
+  function read(){
+    if(Utilerias::verifica_sesion_redirige($this)){
+
+      $usuario = $this->session->userdata[DATOSUSUARIO];
+      $result = $this->Visit_cct_model->get_datos($usuario["idusuario"]);
+
+      $arr_columnas = array("id","nvisitas","cct","nombre_ct","nombre_nivel","nombre_modalidad","domicilio");
+
+      $response = array(
+        "result" => $result,
+        "columnas" => $arr_columnas
+      );
+      // echo "<pre>"; print_r($response); die();
+      Utilerias::enviaDataJson(200, $response, $this);
+      exit;
+    }
+  }// get_all()
 
 
 }
