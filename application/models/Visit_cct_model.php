@@ -14,7 +14,7 @@ class Visit_cct_model extends CI_Model {
           ";
           // echo $str_query; die();
        return $this->db->query($str_query)->result_array();
-     }// get_all()
+     }// get_asignadas()
 
 
 }
