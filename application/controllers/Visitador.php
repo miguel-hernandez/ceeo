@@ -118,5 +118,11 @@ class Visitador extends CI_Controller {
     }
   }
 
+  function savecuestionario(){
+    echo "<pre>";
+    print_r($_POST);
+    die();
+  }
+
 
 }

@@ -126,41 +126,42 @@ function Visitador(){
             
         html_doc="";
         html_doc+="<div class='container-fluid'>";
-        html_doc+="form action='action_page.php'";
+        html_doc+="<form action='savecuestionario' method='post'>";
         html_doc+="<div id= 'div_contenedor_preguntas'>";
            
             for(var i = 0; i < arr_datos.length; i++){
               if(arr_datos[i]['idtipopregunta'] == 1 || arr_datos[i]['idtipopregunta'] == "1"){
-                html_doc +="<div class='col-xs-8'><label>"+arr_datos[i]['npregunta']+".- "+arr_datos[i]['pregunta']+"</label></div>";
+                html_doc +="<div class='col-xs-8'><label >"+arr_datos[i]['npregunta']+".- "+arr_datos[i]['pregunta']+"</label></div>";
                 html_doc +="<div class='col-xs-8'>";
                 html_doc+= "<label class='checkbox-inline'>";
-                  html_doc+= "<input type='checkbox' id='checkboxEnLinea1' value='opcion_1'> SI";
+                  html_doc+= "<input type='radio' id='checkboxEnLinea1' value='si' name='"+arr_datos[i]['idpregunta']+"'> SI";
                 html_doc+= "</label>";
                 html_doc+= "<label class='checkbox-inline'>";
-                  html_doc+= "<input type='checkbox' id='checkboxEnLinea2' value='opcion_2'> NO";
+                  html_doc+= "<input type='radio' id='checkboxEnLinea2' value='no' name='"+arr_datos[i]['idpregunta']+"'> NO";
                 html_doc+= "</label>";
                 html_doc +="</div>";
               }else if(arr_datos[i]['idtipopregunta'] == 2 || arr_datos[i]['idtipopregunta'] == "2"){
                 html_doc +="<div class='col-xs-8'><label>"+arr_datos[i]['npregunta']+".- "+arr_datos[i]['pregunta']+"</label></div>";
                 html_doc +="<div class='col-xs-8'>";
-                html_doc+= "<input >";
+                html_doc+= "<input name='"+arr_datos[i]['idpregunta']+"'>";
                 html_doc +="</div>";
               }else if(arr_datos[i]['idtipopregunta'] == 3 || arr_datos[i]['idtipopregunta'] == "3"){
                  html_doc +="<div class='col-xs-8'><label>"+arr_datos[i]['npregunta']+".- "+arr_datos[i]['pregunta']+"</label></div>";
                 html_doc +="<div class='col-xs-8'>";
                 html_doc+= "<label class='checkbox-inline'>";
-                  html_doc+= "<input type='checkbox' id='checkboxEnLinea1' value='opcion_1'> SI";
+                  html_doc+= "<input type='radio' id='checkboxEnLinea1' value='si' name='"+arr_datos[i]['idpregunta']+"'> SI";
                 html_doc+= "</label>";
                 html_doc+= "<label class='checkbox-inline'>";
-                  html_doc+= "<input type='checkbox' id='checkboxEnLinea2' value='opcion_2'> NO";
+                  html_doc+= "<input type='radio' id='checkboxEnLinea2' value='no' name='"+arr_datos[i]['idpregunta']+"'> NO";
                 html_doc+= "</label>";
                 html_doc +="</div>";
                 html_doc +="<div class='col-xs-8'>";
-                html_doc+= "<input >";
+                html_doc+= "<input name='"+arr_datos[i]['idpregunta']+"'>";
                 html_doc +="</div>";
               }
               console.log(arr_datos[i]);
             }
+            html_doc+="<div class='col-xs-2'><input type='submit' value='Grabar'></div>";
             html_doc+="</form> ";
             html_doc+="</div>";
             $("#div_contenedor_preguntas").empty();
