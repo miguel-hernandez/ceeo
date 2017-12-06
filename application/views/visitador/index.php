@@ -39,16 +39,29 @@
 <div class="modal" id="modal_visitador">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
-      <div class="modal-header modalhead">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+      <div class="modal-header modal_head">
+        <button type="button" class="close bold_white" data-dismiss="modal" aria-hidden="true">&times;</button>
         <h4 class="modal-title">Registro</h4>
       </div>
       <div class="modal-body">
         <!-- Contenido del modal -->
-      </div>
+
+        <!-- <div class='container-fluid'> -->
+          <div class='col-xs-12'><label id="modal_visitador_nombrect"></label></div>
+          <div class='col-xs-12'><label>Seleccione una seleccion de cuestionario</label></div>
+          <label class='checkbox-inline'>
+            <input type='radio' name='opciones' id='radio_director_visitador' onclick='obj_visitador.get_cuestions(1);' value='opcion_1'> Director
+          </label>
+          <label class='checkbox-inline'>
+            <input type='radio' name='opciones' id='radio_docente_visitador' onclick='obj_visitador.get_cuestions(2);' value='opcion_2'> Docente
+          </label>
+        <!-- </div> -->
+        <div id= 'div_contenedor_preguntas'></div>
+
+      </div><!-- modal-body -->
     </div>
   </div>
-</div> 
+</div>
 
 <div id="modal_reportevisitas" class="modal fade"  tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true" data-keyboard="false" data-backdrop="static">
   <div class="modal-dialog">
