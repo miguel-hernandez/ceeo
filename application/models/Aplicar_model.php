@@ -26,4 +26,13 @@ class Aplicar_model extends CI_Model {
        return $this->db->query($str_query)->result_array();
      }// get_visitadas()
 
+     function get_datos_visitadas($idcct,$idvisitador)
+     {
+       $str_query = " SELECT ap.idaplicar AS id, 1 AS folio, ap.fcreacion AS fecha, 'PENDIENTE' AS atendio
+                      FROM aplicar ap
+                      WHERE ap.idcct = {$idcct} AND  ap.idusuario = {$idvisitador}
+          ";
+          // echo $str_query; die();
+       return $this->db->query($str_query)->result_array();
+     }// get_visitadas()
 }
