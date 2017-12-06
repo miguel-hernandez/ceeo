@@ -102,5 +102,21 @@ class Visitador extends CI_Controller {
     }
   }// read()
 
+  function get_cuestions(){
+    if(Utilerias::verifica_sesion_redirige($this)){
+      $tipo = $this->input->post('tipo');
+      if($tipo == 2){
+        $preguntas = $this->Visit_cct_model->get_cuestions($tipo);
+      }elseif ($tipo == 1) {
+        $preguntas = $this->Visit_cct_model->get_cuestions($tipo);
+      }
+      $response = array(
+          "result" => $preguntas,
+        );
+      Utilerias::enviaDataJson(200, $response, $this);
+      exit;
+    }
+  }
+
 
 }

@@ -29,8 +29,30 @@ $("#btn_visitador_registrar").click(function(e){
     if(arr_row.length==0){
         obj_message.notification("","Seleccione un registro","error");
     }else{
+        $("#modal_visitador .modal-body").empty();
+        html="";
+        html+="<div class='container-fluid'>";
+          html+="<div class='col-xs-12'><label>Escuela "+arr_row[0]['nombre_ct']+"</label></div>";
+          html+="<div class='col-xs-12'><label>Seleccione una seleccion de cuestionario</label></div>";
+          html+="<label class='checkbox-inline'>";
+            html+="<input type='radio' name='opciones' id='radio_director_visitador' onclick='obj_visitador.get_cuestions(1);' value='opcion_1'> Director";
+          html+="</label>";
+          html+="<label class='checkbox-inline'>";
+            html+="<input type='radio' name='opciones' id='radio_docente_visitador' onclick='obj_visitador.get_cuestions(2);' value='opcion_2'> Docente";
+          html+="</label>";
+        html+="</div>";
+        html+="<div id= 'div_contenedor_preguntas'></div>";
+        $("#modal_visitador .modal-body").append(html);
+        $("#modal_visitador").modal("show");
       console.info(arr_row[0]);
     }
+});
+
+$("#radio_docente_visitador").change(function(event) {
+  /* Act on the event */
+  e.preventDefault();
+    obj_visitador = new Visitador();
+  obj_visitador.get_cuestions("docente");
 });
 
 $("#modal_catalogo_btn_cerrar").click(function(e){
@@ -82,6 +104,73 @@ function Visitador(){
             console.error("Error in read()"); console.table(e);
           });
     }// read()
+
+    this.get_cuestions = function(tipo){
+      $("#modal_visitador").modal("hide");
+       var html_doc = "";
+      var ruta = base_url+"Visitador/get_cuestions";
+      $.ajax({
+        url:ruta,
+        method:"POST",
+        data:"tipo="+tipo,
+        beforeSend: function( xhr ) {
+          // $("#modal_visitador .modal-body").empty();
+              obj_message.loading("Descargando datos");
+            }
+          })
+          .done(function( data ) {
+            swal.close();
+            var arr_datos = data.result;
+            console.table(arr_datos);
+
+            
+        html_doc="";
+        html_doc+="<div class='container-fluid'>";
+        html_doc+="form action='action_page.php'";
+        html_doc+="<div id= 'div_contenedor_preguntas'>";
+           
+            for(var i = 0; i < arr_datos.length; i++){
+              if(arr_datos[i]['idtipopregunta'] == 1 || arr_datos[i]['idtipopregunta'] == "1"){
+                html_doc +="<div class='col-xs-8'><label>"+arr_datos[i]['npregunta']+".- "+arr_datos[i]['pregunta']+"</label></div>";
+                html_doc +="<div class='col-xs-8'>";
+                html_doc+= "<label class='checkbox-inline'>";
+                  html_doc+= "<input type='checkbox' id='checkboxEnLinea1' value='opcion_1'> SI";
+                html_doc+= "</label>";
+                html_doc+= "<label class='checkbox-inline'>";
+                  html_doc+= "<input type='checkbox' id='checkboxEnLinea2' value='opcion_2'> NO";
+                html_doc+= "</label>";
+                html_doc +="</div>";
+              }else if(arr_datos[i]['idtipopregunta'] == 2 || arr_datos[i]['idtipopregunta'] == "2"){
+                html_doc +="<div class='col-xs-8'><label>"+arr_datos[i]['npregunta']+".- "+arr_datos[i]['pregunta']+"</label></div>";
+                html_doc +="<div class='col-xs-8'>";
+                html_doc+= "<input >";
+                html_doc +="</div>";
+              }else if(arr_datos[i]['idtipopregunta'] == 3 || arr_datos[i]['idtipopregunta'] == "3"){
+                 html_doc +="<div class='col-xs-8'><label>"+arr_datos[i]['npregunta']+".- "+arr_datos[i]['pregunta']+"</label></div>";
+                html_doc +="<div class='col-xs-8'>";
+                html_doc+= "<label class='checkbox-inline'>";
+                  html_doc+= "<input type='checkbox' id='checkboxEnLinea1' value='opcion_1'> SI";
+                html_doc+= "</label>";
+                html_doc+= "<label class='checkbox-inline'>";
+                  html_doc+= "<input type='checkbox' id='checkboxEnLinea2' value='opcion_2'> NO";
+                html_doc+= "</label>";
+                html_doc +="</div>";
+                html_doc +="<div class='col-xs-8'>";
+                html_doc+= "<input >";
+                html_doc +="</div>";
+              }
+              console.log(arr_datos[i]);
+            }
+            html_doc+="</form> ";
+            html_doc+="</div>";
+            $("#div_contenedor_preguntas").empty();
+            $("#modal_visitador .modal-body").append(html_doc);
+            $("#modal_visitador").modal("show");
+          })
+          .fail(function(e) {
+            console.error("Error in read()"); console.table(e);
+          });
+    }
 
 
 }// Visitador

@@ -40,6 +40,16 @@ footer{
   /*border-bottom: rgba(73,155,234,1) 2px solid;*/
   border-radius: 4px 4px 0px 0px;
 }
+.modalhead{
+ background-color:#546e7a;
+ color: #FFFFFF !important;
+ font-size: 18px;
+ text-align:center;
+ padding: 4px;
+ font-weight: bold;
+ text-transform:none;
+  border-radius: 4px 4px 0px 0px;
+}
 
 .modal80{
   width: 80% !important;

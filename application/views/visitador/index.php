@@ -36,6 +36,19 @@
   </div><!-- row -->
 </div>
 
+<div class="modal" id="modal_visitador">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header modalhead">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">Registro</h4>
+      </div>
+      <div class="modal-body">
+        <!-- Contenido del modal -->
+      </div>
+    </div>
+  </div>
+</div> 
 
 <div id="modal_reportevisitas" class="modal fade"  tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true" data-keyboard="false" data-backdrop="static">
   <div class="modal-dialog">
