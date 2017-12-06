@@ -34,19 +34,47 @@ class Visitador extends CI_Controller {
       }
 	}//
 
+  public function re_arma($array){
+    $arr = array();
+    foreach ($array as $item) {
+      array_push($arr, $item);
+    }
+    return $arr;
+  }
+
   function read(){
     if(Utilerias::verifica_sesion_redirige($this)){
 
       $usuario = $this->session->userdata[DATOSUSUARIO];
       $result = $this->Visit_cct_model->get_datos($usuario["idusuario"]);
-
+      $result2 = $result;
       $arr_columnas = array("id","nvisitas","cct","nombre_ct","nombre_nivel","nombre_modalidad","domicilio");
 
+      $array_aux = array();
+      $array_pd = array();
+      for($i=0;$i<count($result); $i++) {
+          $item = $result[$i];
+          $numero = 0;
+          $cct = $item["cct"];
+          for($j=0;$j<count($result2); $j++) {
+            $item2 = $result2[$j];
+            $cct2 = $item2["cct"];
+            if($cct==$cct2){
+              $numero = $numero+$item2["nvisitas"];
+            }
+          }
+          $item["nvisitas"] = $numero;
+         array_push($array_aux, $item);
+      }
+
+      $sin_duplicados = array_unique($array_aux, SORT_REGULAR);
+      $result_final = $this->re_arma($sin_duplicados);
+
       $response = array(
-        "result" => $result,
+        "result" => $result_final,
         "columnas" => $arr_columnas
       );
-      // echo "<pre>"; print_r($response); die();
+
       Utilerias::enviaDataJson(200, $response, $this);
       exit;
     }
