@@ -25,7 +25,7 @@
       <button id="btn_visitador_mostrar" type="button" class="btn btn-primary btn-block">Mostrar</button>
     </div>
     <div class="col-xs-6 col-sm-6 col-md-1 col-lg-1">
-      <button id="" type="button" class="btn btn-primary btn-block">Registrar</button>
+      <button id="btn_visitador_registrar" type="button" class="btn btn-primary btn-block">Registrar</button>
     </div>
     <div class="col-xs-6 col-sm-6 col-md-1 col-lg-1">
       <button id="" type="button" class="btn btn-primary btn-block">Ubicación</button>
