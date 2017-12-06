@@ -30,4 +30,9 @@ class Visit_cct_model extends CI_Model {
        return $this->db->query($str_query)->result_array();
      }// get_asignadas()
 
+     function get_cuestions($tipo){
+      $query = "SELECT * FROM pregunta WHERE idencuesta = {$tipo}";
+      return $this->db->query($query)->result_array();
+     }
+
 }

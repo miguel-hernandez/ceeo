@@ -43,4 +43,18 @@
   </div><!-- row -->
 </div>
 
+<div class="modal" id="modal_visitador">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header modalhead">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">Registro</h4>
+      </div>
+      <div class="modal-body">
+        <!-- Contenido del modal -->
+      </div>
+    </div>
+  </div>
+</div> 
+
 <script src="<?php echo base_url('assets/js/visitador/visitador.js'); ?>"></script>
