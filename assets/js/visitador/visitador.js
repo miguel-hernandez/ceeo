@@ -17,6 +17,17 @@ $("#btn_visitador_mostrar").click(function(e){
     }
 });
 
+$("#btn_visitador_registrar").click(function(e){
+    e.preventDefault();
+    var arr_row = obj_grid.get_row_selected();
+    var columnas = obj_grid.columns;
+    if(arr_row.length==0){
+        obj_message.notification("","Seleccione un registro","error");
+    }else{
+      console.info(arr_row[0]);
+    }
+});
+
 $("#modal_catalogo_btn_cerrar").click(function(e){
     e.preventDefault();
     $("#"+obj_catalogo.idmodal).modal("hide");
