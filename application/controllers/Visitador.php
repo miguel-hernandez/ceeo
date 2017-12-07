@@ -103,8 +103,12 @@ class Visitador extends CI_Controller {
   }// read()
 
   function get_cuestions(){
+    // echo "<pre>";
+    // print_r($_POST);
+    // die();
     if(Utilerias::verifica_sesion_redirige($this)){
       $tipo = $this->input->post('tipo');
+      $idcct = $this->input->post('idcct');
       if($tipo == 2){
         $preguntas = $this->Visit_cct_model->get_cuestions($tipo);
       }elseif ($tipo == 1) {
@@ -112,6 +116,8 @@ class Visitador extends CI_Controller {
       }
       $response = array(
           "result" => $preguntas,
+          "idcct" => $idcct,
+          "atendio" => $tipo
         );
       Utilerias::enviaDataJson(200, $response, $this);
       exit;
@@ -119,9 +125,19 @@ class Visitador extends CI_Controller {
   }
 
   function savecuestionario(){
-    echo "<pre>";
-    print_r($_POST);
-    die();
+    // echo "<pre>";
+    // print_r($_POST);
+    // die();
+    if(Utilerias::verifica_sesion_redirige($this)){
+      $usuario = $this->session->userdata[DATOSUSUARIO];
+      $atendio = $this->input->post('atendio');
+      $idcct = $this->input->post('idcct');
+    //   echo "<pre>";
+    // print_r($usuario['idusuario']);
+    // die();
+    $idaplica = $this->Aplicar_model->insert_aplica($usuario['idusuario'], $idcct, $atendio);
+    echo $idaplica; die();
+    }
   }
 
 

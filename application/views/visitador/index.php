@@ -55,6 +55,7 @@
           <label class='checkbox-inline'>
             <input type='radio' name='opciones' id='radio_docente_visitador' onclick='obj_visitador.get_cuestions(2);' value='opcion_2'> Docente
           </label>
+          <input type="hidden" name="atendio" id="idcct" >
         <!-- </div> -->
         <div id= 'div_contenedor_preguntas'></div>
 
@@ -99,3 +100,4 @@
 </div> <!--  modal -->
 
 <script src="<?php echo base_url('assets/js/visitador/visitador.js'); ?>"></script>
+<!-- <script src="<?php echo base_url(); ?>js/jquery.validate_vi.js"></script> -->

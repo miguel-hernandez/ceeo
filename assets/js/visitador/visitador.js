@@ -1,4 +1,37 @@
 $(function() {
+  $.validator.addMethod("valueNotEquals", function(value, element, arg){
+       return arg !== value;
+    });
+
+    $("#form_recepcion").validate({
+        onclick:false, onfocusout: false, onkeypress:false, onkeydown:false, onkeyup:false,
+        rules: {
+            autor_libro: {required: true},
+            n_solicitante: {required: true},
+            p_solicitante: {required: true},
+            a_solicitante: {required: true},
+            titulo_academico: { valueNotEquals: "0" },
+            dependencia: {required: true},
+            departamento: {required: true},
+            puesto: {required: true, minlength: 5},
+            n_oficio: {required: true},
+            solicitud: {required: true},
+            observaciones: {required: true}
+        },
+        messages: {
+            autor_libro: {required: " *Seleccione un autor"},
+            n_solicitante: {required: " *es requerido"},
+            p_solicitante: {required: " *es requerido"},
+            a_solicitante: {required: " *es requerido"},
+            titulo_academico: { valueNotEquals: "Seleccione una opción" },
+            dependencia: { required: " *es requerido" },
+            departamento: { required: " *es requerido" },
+            puesto: { required: " *es requerido", minlength: "*almenos 5 caracteres" },
+            n_oficio: {required: "*es requerido"},
+            solicitud: {required: "*es requerido"},
+            observaciones: {required: "*es requerido"}
+        }
+    });
   obj_message = new Message();
   obj_visitador = new Visitador();
   obj_visitador.read();
@@ -30,6 +63,7 @@ $("#btn_visitador_registrar").click(function(e){
   }else{
     $("#modal_visitador_nombrect").empty();
     $("#modal_visitador_nombrect").append(arr_row[0]['nombre_ct']);
+    $("#idcct").val(arr_row[0]['id']);
     // $("#modal_visitador .modal-body").append(html);
     $("#modal_visitador").modal("show");
     console.info(arr_row[0]);
@@ -93,13 +127,15 @@ function Visitador(){
     $.ajax({
       url:ruta,
       method:"POST",
-      data:"tipo="+tipo,
+      data:{"tipo": tipo, "idcct":$("#idcct").val(), "atendio":tipo},
       beforeSend: function( xhr ) {
         obj_message.loading("Descargando datos");
       }
     })
     .done(function( data ) {
       swal.close();
+      var idcct = data.idcct;
+      var atendio = data.atendio;
       var arr_datos = data.result;
       console.table(arr_datos);
 
@@ -107,8 +143,7 @@ function Visitador(){
       html_doc="";
 
       html_doc+="<div class='row'>";
-      html_doc+="<form action='savecuestionario' method='post'>";
-
+      html_doc+="<form action='savecuestionario' method='post' id='form_cuestionario_doc'>";
       for(var i = 0; i < arr_datos.length; i++){
         if(arr_datos[i]['idtipopregunta'] == 1 || arr_datos[i]['idtipopregunta'] == "1"){
           html_doc +="<div class='col-xs-8'><label >"+arr_datos[i]['npregunta']+".- "+arr_datos[i]['pregunta']+"</label></div>";
@@ -141,7 +176,9 @@ function Visitador(){
         }
         console.log(arr_datos[i]);
       }
-      html_doc+="<div class='col-xs-2'><input type='submit' value='Grabar'></div>";
+      html_doc+="<input type='hidden' name='atendio' value="+atendio+" >";
+      html_doc+="<input type='hidden' name='idcct' value="+idcct+" >";
+      html_doc+="<div class='col-xs-2'><input type='submit' value='Grabar' class='btn btn-primary'></div>";
       html_doc+="</form> ";
       html_doc+="<div>";
 
