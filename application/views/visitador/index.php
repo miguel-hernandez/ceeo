@@ -40,7 +40,7 @@
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header modal_head">
-        <button type="button" class="close bold_white" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <button type="button" class="close bold_white" id="modal_visitador_btn_cerrar" aria-hidden="true">&times;</button>
         <h4 class="modal-title">Registro</h4>
       </div>
       <div class="modal-body">

@@ -143,26 +143,32 @@ function Visitador(){
       html_doc="";
 
       html_doc+="<div class='row'>";
+      html_doc+="<div class='container-fluid'>";
       html_doc+="<form action='savecuestionario' method='post' id='form_cuestionario_doc'>";
       for(var i = 0; i < arr_datos.length; i++){
         if(arr_datos[i]['idtipopregunta'] == 1 || arr_datos[i]['idtipopregunta'] == "1"){
+          html_doc += "<div class='row margintop10'>";
           html_doc +="<div class='col-xs-8'><label >"+arr_datos[i]['npregunta']+".- "+arr_datos[i]['pregunta']+"</label></div>";
-          html_doc +="<div class='col-xs-8'>";
+          html_doc +="<div class='col-xs-4'>";
           html_doc+= "<label class='checkbox-inline'>";
           html_doc+= "<input type='radio' id='checkboxEnLinea1' value='si' name='"+arr_datos[i]['idpregunta']+"-"+arr_datos[i]['idtipopregunta']+"'> SI";
           html_doc+= "</label>";
           html_doc+= "<label class='checkbox-inline'>";
           html_doc+= "<input type='radio' id='checkboxEnLinea2' value='no' name='"+arr_datos[i]['idpregunta']+"-"+arr_datos[i]['idtipopregunta']+"'> NO";
           html_doc+= "</label>";
+          html_doc +="</div>";
           html_doc +="</div>";
         }else if(arr_datos[i]['idtipopregunta'] == 2 || arr_datos[i]['idtipopregunta'] == "2"){
+          html_doc += "<div class='row margintop10'>";
           html_doc +="<div class='col-xs-8'><label>"+arr_datos[i]['npregunta']+".- "+arr_datos[i]['pregunta']+"</label></div>";
-          html_doc +="<div class='col-xs-8'>";
-          html_doc+= "<input name='"+arr_datos[i]['idpregunta']+"-"+arr_datos[i]['idtipopregunta']+"'>";
+          html_doc +="<div class='col-xs-4'>";
+          html_doc+= "<input class='form-control' name='"+arr_datos[i]['idpregunta']+"-"+arr_datos[i]['idtipopregunta']+"'>";
+          html_doc +="</div>";
           html_doc +="</div>";
         }else if(arr_datos[i]['idtipopregunta'] == 3 || arr_datos[i]['idtipopregunta'] == "3"){
+          html_doc += "<div class='row margintop10'>";
           html_doc +="<div class='col-xs-8'><label>"+arr_datos[i]['npregunta']+".- "+arr_datos[i]['pregunta']+"</label></div>";
-          html_doc +="<div class='col-xs-8'>";
+          html_doc +="<div class='col-xs-4'>";
           html_doc+= "<label class='checkbox-inline'>";
           html_doc+= "<input type='radio' id='checkboxEnLinea1' value='si' name='"+arr_datos[i]['idpregunta']+"-"+arr_datos[i]['idtipopregunta']+"'> SI";
           html_doc+= "</label>";
@@ -171,15 +177,17 @@ function Visitador(){
           html_doc+= "</label>";
           html_doc +="</div>";
           html_doc +="<div class='col-xs-8'>";
-          html_doc+= "<input name='"+arr_datos[i]['idpregunta']+"-"+arr_datos[i]['idtipopregunta']+"'>";
+          html_doc+= "<input class='form-control' name='"+arr_datos[i]['idpregunta']+"-"+arr_datos[i]['idtipopregunta']+"'>";
+          html_doc +="</div>";
           html_doc +="</div>";
         }
         console.log(arr_datos[i]);
       }
       html_doc+="<input type='hidden' name='atendio' value="+atendio+" >";
       html_doc+="<input type='hidden' name='idcct' value="+idcct+" >";
-      html_doc+="<div class='col-xs-2'><input type='submit' value='Grabar' class='btn btn-primary'></div>";
+      html_doc+="<div class='col-xs-1 pull-right'><input type='submit' value='Grabar' class='btn btn-primary'></div>";
       html_doc+="</form> ";
+      html_doc+="<div>";
       html_doc+="<div>";
 
       $("#div_contenedor_preguntas").empty();
@@ -242,5 +250,12 @@ $("#modal_reportevisitas_btn_cerrar").click(function(e){
   e.preventDefault();
   $("#grid_reportevisitas").empty();
   $("#modal_reportevisitas").modal("hide");
+  obj_visitador.read();
+});
+
+$("#modal_visitador_btn_cerrar").click(function(e){
+  e.preventDefault();
+  $("#grid_reportevisitas").empty();
+  $("#modal_visitador").modal("hide");
   obj_visitador.read();
 });
