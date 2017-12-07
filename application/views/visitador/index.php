@@ -36,7 +36,7 @@
   </div><!-- row -->
 </div><!-- container-fluid -->
 
-<div class="modal" id="modal_visitador">
+<div class="modal" id="modal_visitador" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true" data-keyboard="false" data-backdrop="static">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header modal_head">
