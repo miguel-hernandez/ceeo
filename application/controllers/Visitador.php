@@ -8,6 +8,7 @@ class Visitador extends CI_Controller {
         $this->load->library('Utilerias');
         $this->load->model('Visit_cct_model');
         $this->load->model('Aplicar_model');
+        $this->load->model('Respuestas_model');
     }
 
 
@@ -125,18 +126,20 @@ class Visitador extends CI_Controller {
   }
 
   function savecuestionario(){
-    // echo "<pre>";
-    // print_r($_POST);
-    // die();
     if(Utilerias::verifica_sesion_redirige($this)){
       $usuario = $this->session->userdata[DATOSUSUARIO];
       $atendio = $this->input->post('atendio');
       $idcct = $this->input->post('idcct');
-    //   echo "<pre>";
-    // print_r($usuario['idusuario']);
-    // die();
     $idaplica = $this->Aplicar_model->insert_aplica($usuario['idusuario'], $idcct, $atendio);
-    echo $idaplica; die();
+    foreach ($_POST as $key => $value) {
+      if($key != 'atendio' && $key != 'idcct'){
+        $porciones = explode("-", $key);
+        $idpregunta = $porciones[0];
+        $tipopregunta = $porciones[1];
+        $inserto = $this->Respuestas_model->insert_response($idpregunta, $value, $idaplica, $tipopregunta);
+      }
+    }
+    redirect('login/index');
     }
   }
 

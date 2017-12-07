@@ -149,29 +149,29 @@ function Visitador(){
           html_doc +="<div class='col-xs-8'><label >"+arr_datos[i]['npregunta']+".- "+arr_datos[i]['pregunta']+"</label></div>";
           html_doc +="<div class='col-xs-8'>";
           html_doc+= "<label class='checkbox-inline'>";
-          html_doc+= "<input type='radio' id='checkboxEnLinea1' value='si' name='"+arr_datos[i]['idpregunta']+"'> SI";
+          html_doc+= "<input type='radio' id='checkboxEnLinea1' value='si' name='"+arr_datos[i]['idpregunta']+"-"+arr_datos[i]['idtipopregunta']+"'> SI";
           html_doc+= "</label>";
           html_doc+= "<label class='checkbox-inline'>";
-          html_doc+= "<input type='radio' id='checkboxEnLinea2' value='no' name='"+arr_datos[i]['idpregunta']+"'> NO";
+          html_doc+= "<input type='radio' id='checkboxEnLinea2' value='no' name='"+arr_datos[i]['idpregunta']+"-"+arr_datos[i]['idtipopregunta']+"'> NO";
           html_doc+= "</label>";
           html_doc +="</div>";
         }else if(arr_datos[i]['idtipopregunta'] == 2 || arr_datos[i]['idtipopregunta'] == "2"){
           html_doc +="<div class='col-xs-8'><label>"+arr_datos[i]['npregunta']+".- "+arr_datos[i]['pregunta']+"</label></div>";
           html_doc +="<div class='col-xs-8'>";
-          html_doc+= "<input name='"+arr_datos[i]['idpregunta']+"'>";
+          html_doc+= "<input name='"+arr_datos[i]['idpregunta']+"-"+arr_datos[i]['idtipopregunta']+"'>";
           html_doc +="</div>";
         }else if(arr_datos[i]['idtipopregunta'] == 3 || arr_datos[i]['idtipopregunta'] == "3"){
           html_doc +="<div class='col-xs-8'><label>"+arr_datos[i]['npregunta']+".- "+arr_datos[i]['pregunta']+"</label></div>";
           html_doc +="<div class='col-xs-8'>";
           html_doc+= "<label class='checkbox-inline'>";
-          html_doc+= "<input type='radio' id='checkboxEnLinea1' value='si' name='"+arr_datos[i]['idpregunta']+"'> SI";
+          html_doc+= "<input type='radio' id='checkboxEnLinea1' value='si' name='"+arr_datos[i]['idpregunta']+"-"+arr_datos[i]['idtipopregunta']+"'> SI";
           html_doc+= "</label>";
           html_doc+= "<label class='checkbox-inline'>";
-          html_doc+= "<input type='radio' id='checkboxEnLinea2' value='no' name='"+arr_datos[i]['idpregunta']+"'> NO";
+          html_doc+= "<input type='radio' id='checkboxEnLinea2' value='no' name='"+arr_datos[i]['idpregunta']+"-"+arr_datos[i]['idtipopregunta']+"'> NO";
           html_doc+= "</label>";
           html_doc +="</div>";
           html_doc +="<div class='col-xs-8'>";
-          html_doc+= "<input name='"+arr_datos[i]['idpregunta']+"'>";
+          html_doc+= "<input name='"+arr_datos[i]['idpregunta']+"-"+arr_datos[i]['idtipopregunta']+"'>";
           html_doc +="</div>";
         }
         console.log(arr_datos[i]);
