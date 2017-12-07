@@ -34,7 +34,17 @@ class Visitador extends CI_Controller {
       $usuario = $this->session->userdata[DATOSUSUARIO];
       $result = $this->Visit_cct_model->get_datos($usuario["idusuario"]);
       $result2 = $result;
-      $arr_columnas = array("id","nvisitas","cct","nombre_ct","turno", "nombre_nivel","nombre_modalidad","domicilio");
+      // $arr_columnas = array("id","nvisitas","cct","nombre_ct","turno", "nombre_nivel","nombre_modalidad","domicilio");
+      $arr_columnas = array(
+       "id"=>array("type"=>"hidden", "header"=>"id"),
+       "nvisitas"=>array("type"=>"text", "header"=>"No. visitas"),
+       "cct"=>array("type"=>"text", "header"=>"CCT"),
+       "nombre_ct"=>array("type"=>"text", "header"=>"Nombre"),
+       "turno"=>array("type"=>"text", "header"=>"Turno"),
+       "nombre_nivel"=>array("type"=>"text", "header"=>"Nivel"),
+       "nombre_modalidad"=>array("type"=>"text", "header"=>"Modalidad"),
+       "domicilio"=>array("type"=>"text", "header"=>"Domicilio")
+     );
 
       $array_aux = array();
       $array_pd = array();
@@ -88,7 +98,13 @@ class Visitador extends CI_Controller {
     if(Utilerias::verifica_sesion_redirige($this)){
       $idcct = $this->input->post('idcct');
 
-      $arr_columnas = array("id", "folio","fecha","atendio");
+      // $arr_columnas = array("id", "folio","fecha","atendio");
+      $arr_columnas = array(
+         "id"=>array("type"=>"hidden", "header"=>"id"),
+         "folio"=>array("type"=>"text", "header"=>"Folio"),
+         "fecha"=>array("type"=>"text", "header"=>"Fecha"),
+         "atendio"=>array("type"=>"text", "header"=>"Atendió")
+       );
 
       $usuario = $this->session->userdata[DATOSUSUARIO];
       $result = $this->Aplicar_model->get_datos_visitadas($idcct,$usuario["idusuario"]);

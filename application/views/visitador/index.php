@@ -34,7 +34,7 @@
       <div id="grid_visitador"></div>
     </div>
   </div><!-- row -->
-</div>
+</div><!-- container-fluid -->
 
 <div class="modal" id="modal_visitador">
   <div class="modal-dialog modal-lg">
@@ -44,9 +44,7 @@
         <h4 class="modal-title">Registro</h4>
       </div>
       <div class="modal-body">
-        <!-- Contenido del modal -->
 
-        <!-- <div class='container-fluid'> -->
           <div class='col-xs-12'><label id="modal_visitador_nombrect"></label></div>
           <div class='col-xs-12'><label>Seleccione una seleccion de cuestionario</label></div>
           <label class='checkbox-inline'>
@@ -62,7 +60,7 @@
       </div><!-- modal-body -->
     </div>
   </div>
-</div>
+</div><!-- modal_visitador -->
 
 <div id="modal_reportevisitas" class="modal fade"  tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true" data-keyboard="false" data-backdrop="static">
   <div class="modal-dialog">
@@ -97,7 +95,7 @@
       </div><!-- modal-body -->
     </div><!-- modal-content -->
   </div><!-- modal-dialog -->
-</div> <!--  modal -->
+</div> <!--  modal_reportevisitas -->
 
 <script src="<?php echo base_url('assets/js/visitador/visitador.js'); ?>"></script>
 <!-- <script src="<?php echo base_url(); ?>js/jquery.validate_vi.js"></script> -->
