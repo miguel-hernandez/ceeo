@@ -150,7 +150,7 @@ function Visitador(){
         if(arr_datos[i]['idtipopregunta'] == 1 || arr_datos[i]['idtipopregunta'] == "1"){
           html_doc += "<div class='row margintop10'>";
           html_doc +="<div class='col-xs-8'><label >"+arr_datos[i]['npregunta']+".- "+arr_datos[i]['pregunta']+"</label></div>";
-          html_doc +="<div class='col-xs-4'>";
+          html_doc +="<div class='col-xs-2'>";
           html_doc+= "<label class='checkbox-inline'>";
           html_doc+= "<input type='radio' id='checkboxEnLinea1' class='requerido' value='si' name='"+arr_datos[i]['idpregunta']+"-"+arr_datos[i]['idtipopregunta']+"'> SI";
           html_doc+= "</label>";
@@ -158,6 +158,7 @@ function Visitador(){
           html_doc+= "<input type='radio' id='checkboxEnLinea2' class='requerido' value='no' name='"+arr_datos[i]['idpregunta']+"-"+arr_datos[i]['idtipopregunta']+"'> NO";
           html_doc+= "</label>";
           html_doc +="</div>";
+          html_doc+= "<div class='col-xs-2'><label id='label_"+arr_datos[i]['idpregunta']+"-"+arr_datos[i]['idtipopregunta']+"' style='color:red;'></label></div>";
           html_doc +="</div>";
         }else if(arr_datos[i]['idtipopregunta'] == 2 || arr_datos[i]['idtipopregunta'] == "2"){
           html_doc += "<div class='row margintop10'>";
@@ -169,18 +170,19 @@ function Visitador(){
         }else if(arr_datos[i]['idtipopregunta'] == 3 || arr_datos[i]['idtipopregunta'] == "3"){
           html_doc += "<div class='row margintop10'>";
           html_doc +="<div class='col-xs-8'><label>"+arr_datos[i]['npregunta']+".- "+arr_datos[i]['pregunta']+"</label></div>";
-          html_doc +="<div class='col-xs-4'>";
+          html_doc +="<div class='col-xs-2'>";
           html_doc+= "<label class='checkbox-inline'>";
           html_doc+= "<input type='radio' id='checkboxEnLinea1' class='requerido' value='si' name='"+arr_datos[i]['idpregunta']+"-"+arr_datos[i]['idtipopregunta']+"'> SI";
           html_doc+= "</label>";
           html_doc+= "<label class='checkbox-inline'>";
           html_doc+= "<input type='radio' id='checkboxEnLinea2' class='requerido' value='no' name='"+arr_datos[i]['idpregunta']+"-"+arr_datos[i]['idtipopregunta']+"'> NO";
           html_doc+= "</label>";
-          html_doc +="</div>";
+          html_doc +="</div>";//cierra div checks
+          html_doc+= "<div class='col-xs-2'><label id='label_"+arr_datos[i]['idpregunta']+"-"+arr_datos[i]['idtipopregunta']+"' style='color:red;'></label></div>";
           html_doc +="<div class='col-xs-8'>";
           html_doc+= "<input class='form-control requerido' name='"+arr_datos[i]['idpregunta']+"-"+arr_datos[i]['idtipopregunta']+"'>";
           html_doc +="</div>";
-          html_doc +="</div>";
+          html_doc +="</div>";//cierra div class row
         }
         console.log(arr_datos[i]);
       }
@@ -256,7 +258,9 @@ $("#modal_reportevisitas_btn_cerrar").click(function(e){
 
 $("#modal_visitador_btn_cerrar").click(function(e){
   e.preventDefault();
-  $("#grid_reportevisitas").empty();
+  $("#radio_director_visitador").prop('checked', false);
+  $("#radio_docente_visitador").prop('checked', false);
+  $("#div_contenedor_preguntas").empty();
   $("#modal_visitador").modal("hide");
   obj_visitador.read();
 });
@@ -264,10 +268,21 @@ $("#modal_visitador_btn_cerrar").click(function(e){
 $('#div_contenedor_preguntas').on('submit','#form_cuestionario_doc',function(event){
   var error = 0;
   $('.requerido').each(function(i, elem){
-    if($(elem).val() == ''){
+    console.log(elem.id);
+    console.log(elem.type);
+    console.log(elem.name);
+    if(elem.type == "radio"){
+      if(!$("input[name="+elem.name+"]:checked").val()) {
+        // alert("falta seleccionar");
+        $('#label_'+elem.name).html('seleccione <br />');
+        error++;
+      }
+    }else{
+      if($(elem).val() == ''){
       $(elem).css({'border':'1px solid red'});
       error++;
       }
+    }
     });
   if(error > 0){
     event.preventDefault();
