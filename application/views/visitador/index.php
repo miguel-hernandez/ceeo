@@ -45,7 +45,7 @@
       </div>
       <div class="modal-body">
 
-          <div class='col-xs-12'><label id="modal_visitador_nombrect"></label></div>
+          <div class='col-xs-12'><center><label id="modal_visitador_nombrect"></label></center></div>
           <div class='col-xs-12'><label>Seleccione una seleccion de cuestionario</label></div>
           <label class='checkbox-inline'>
             <input type='radio' name='opciones' id='radio_director_visitador' onclick='obj_visitador.get_cuestions(1);' value='opcion_1'> Director

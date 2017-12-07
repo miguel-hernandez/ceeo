@@ -62,7 +62,7 @@ $("#btn_visitador_registrar").click(function(e){
     obj_message.notification("","Seleccione un registro","error");
   }else{
     $("#modal_visitador_nombrect").empty();
-    $("#modal_visitador_nombrect").append(arr_row[0]['nombre_ct']);
+    $("#modal_visitador_nombrect").append(arr_row[0]['nombre_ct']+"("+arr_row[0]['cct']+" / "+arr_row[0]['turno']+")");
     $("#idcct").val(arr_row[0]['id']);
     // $("#modal_visitador .modal-body").append(html);
     $("#modal_visitador").modal("show");
