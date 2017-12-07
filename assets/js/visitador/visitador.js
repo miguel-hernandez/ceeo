@@ -145,16 +145,17 @@ function Visitador(){
       html_doc+="<div class='row'>";
       html_doc+="<div class='container-fluid'>";
       html_doc+="<form action='savecuestionario' method='post' id='form_cuestionario_doc'>";
+      html_doc+= "<center><label id='aviso' style='color:red;'></label></center>";
       for(var i = 0; i < arr_datos.length; i++){
         if(arr_datos[i]['idtipopregunta'] == 1 || arr_datos[i]['idtipopregunta'] == "1"){
           html_doc += "<div class='row margintop10'>";
           html_doc +="<div class='col-xs-8'><label >"+arr_datos[i]['npregunta']+".- "+arr_datos[i]['pregunta']+"</label></div>";
           html_doc +="<div class='col-xs-4'>";
           html_doc+= "<label class='checkbox-inline'>";
-          html_doc+= "<input type='radio' id='checkboxEnLinea1' value='si' name='"+arr_datos[i]['idpregunta']+"-"+arr_datos[i]['idtipopregunta']+"'> SI";
+          html_doc+= "<input type='radio' id='checkboxEnLinea1' class='requerido' value='si' name='"+arr_datos[i]['idpregunta']+"-"+arr_datos[i]['idtipopregunta']+"'> SI";
           html_doc+= "</label>";
           html_doc+= "<label class='checkbox-inline'>";
-          html_doc+= "<input type='radio' id='checkboxEnLinea2' value='no' name='"+arr_datos[i]['idpregunta']+"-"+arr_datos[i]['idtipopregunta']+"'> NO";
+          html_doc+= "<input type='radio' id='checkboxEnLinea2' class='requerido' value='no' name='"+arr_datos[i]['idpregunta']+"-"+arr_datos[i]['idtipopregunta']+"'> NO";
           html_doc+= "</label>";
           html_doc +="</div>";
           html_doc +="</div>";
@@ -162,7 +163,7 @@ function Visitador(){
           html_doc += "<div class='row margintop10'>";
           html_doc +="<div class='col-xs-8'><label>"+arr_datos[i]['npregunta']+".- "+arr_datos[i]['pregunta']+"</label></div>";
           html_doc +="<div class='col-xs-4'>";
-          html_doc+= "<input class='form-control' name='"+arr_datos[i]['idpregunta']+"-"+arr_datos[i]['idtipopregunta']+"'>";
+          html_doc+= "<input class='form-control requerido' name='"+arr_datos[i]['idpregunta']+"-"+arr_datos[i]['idtipopregunta']+"'>";
           html_doc +="</div>";
           html_doc +="</div>";
         }else if(arr_datos[i]['idtipopregunta'] == 3 || arr_datos[i]['idtipopregunta'] == "3"){
@@ -170,14 +171,14 @@ function Visitador(){
           html_doc +="<div class='col-xs-8'><label>"+arr_datos[i]['npregunta']+".- "+arr_datos[i]['pregunta']+"</label></div>";
           html_doc +="<div class='col-xs-4'>";
           html_doc+= "<label class='checkbox-inline'>";
-          html_doc+= "<input type='radio' id='checkboxEnLinea1' value='si' name='"+arr_datos[i]['idpregunta']+"-"+arr_datos[i]['idtipopregunta']+"'> SI";
+          html_doc+= "<input type='radio' id='checkboxEnLinea1' class='requerido' value='si' name='"+arr_datos[i]['idpregunta']+"-"+arr_datos[i]['idtipopregunta']+"'> SI";
           html_doc+= "</label>";
           html_doc+= "<label class='checkbox-inline'>";
-          html_doc+= "<input type='radio' id='checkboxEnLinea2' value='no' name='"+arr_datos[i]['idpregunta']+"-"+arr_datos[i]['idtipopregunta']+"'> NO";
+          html_doc+= "<input type='radio' id='checkboxEnLinea2' class='requerido' value='no' name='"+arr_datos[i]['idpregunta']+"-"+arr_datos[i]['idtipopregunta']+"'> NO";
           html_doc+= "</label>";
           html_doc +="</div>";
           html_doc +="<div class='col-xs-8'>";
-          html_doc+= "<input class='form-control' name='"+arr_datos[i]['idpregunta']+"-"+arr_datos[i]['idtipopregunta']+"'>";
+          html_doc+= "<input class='form-control requerido' name='"+arr_datos[i]['idpregunta']+"-"+arr_datos[i]['idtipopregunta']+"'>";
           html_doc +="</div>";
           html_doc +="</div>";
         }
@@ -259,3 +260,17 @@ $("#modal_visitador_btn_cerrar").click(function(e){
   $("#modal_visitador").modal("hide");
   obj_visitador.read();
 });
+
+$('#div_contenedor_preguntas').on('submit','#form_cuestionario_doc',function(event){
+  var error = 0;
+  $('.requerido').each(function(i, elem){
+    if($(elem).val() == ''){
+      $(elem).css({'border':'1px solid red'});
+      error++;
+      }
+    });
+  if(error > 0){
+    event.preventDefault();
+    $('#aviso').html('Debe rellenar los campos requeridos <br />');
+    }
+  });
