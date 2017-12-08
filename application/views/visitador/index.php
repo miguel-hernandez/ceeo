@@ -1,30 +1,85 @@
+<style>
+#grid_reportevisitas{
+  background: #FFF;
+}
+body{
+  background-color: #F6F8F8;
+}
+.icono{
+  width: 30px;
+}
+.conteo{
+  font-size: 20px;
+  /*font-weight: bold;*/
+}
+.div_white{
+  background: #FFF;
+  padding: 5px;
+  border-radius: 8px;
+  border: 1px solid #DDE4E5;
+}
+</style>
+
+
 <div class="container-fluid">
   <div class="row">
+    <div class="col-xs-12">
+      <center><h2>Sistema de seguimiento CEEO</h2></center>
+    </div>
+  </div><!-- row -->
+  <br>
+  <br>
+  <div class="row">
     <center>
-      <div class="col-xs-6 col-sm-6 col-md-2 col-lg-2">
-        Asignadas<br><label id="visitador_asignadas"></label>
-      </div>
-      <div class="col-xs-6 col-sm-6 col-md-2 col-lg-2">
-        Visitadas<br><label id="visitador_visitadas"></label>
-      </div>
-      <div class="col-xs-6 col-sm-6 col-md-2 col-lg-2">
-        Sin visitar<br><label id="visitador_sinvisitar"></label>
-      </div>
-      <div class="col-xs-6 col-sm-6 col-md-2 col-lg-2">
-        Total visitas<br><label id="visitador_tvisitadas"></label>
-      </div>
+      <!-- <div class="div_white"> -->
+        <div class="col-xs-6 col-sm-6 col-md-2 col-lg-2">
+          <div class="conteo">Asignadas<br><span id="visitador_asignadas"></span></div>
+        </div>
+        <div class="col-xs-6 col-sm-6 col-md-2 col-lg-2">
+          <div class="conteo">Visitadas<br><span id="visitador_visitadas"></span></div>
+        </div>
+        <div class="col-xs-6 col-sm-6 col-md-2 col-lg-2">
+          <div class="conteo">Sin visitar<br><span id="visitador_sinvisitar"></span></div>
+        </div>
+        <div class="col-xs-6 col-sm-6 col-md-2 col-lg-2">
+          <div class="conteo">Total visitas<br><span id="visitador_tvisitadas"></span></div>
+        </div>
+      <!-- </div> -->
+
+
 
       <div class="col-xs-6 col-sm-6 col-md-1 col-lg-1">
-        <button id="btn_visitador_mostrar" type="button" class="btn btn-primary btn-block">Mostrar</button>
+        <button id="btn_visitador_mostrar" type="button" class="btn btn-primary btn-block">
+          <center>
+            <img src="<?php echo base_url('assets/img/mostrar.svg'); ?>" alt="" class="img-responsive icono">
+            Mostrar
+          </center>
+        </button>
       </div>
       <div class="col-xs-6 col-sm-6 col-md-1 col-lg-1">
-        <button id="btn_visitador_registrar" type="button" class="btn btn-primary btn-block">Registrar</button>
+        <button id="btn_visitador_registrar" type="button" class="btn btn-primary btn-block">
+          <center>
+          <img src="<?php echo base_url('assets/img/registrar.svg'); ?>" alt="" class="img-responsive icono">
+          Registrar
+        </center>
+        </button>
       </div>
       <div class="col-xs-6 col-sm-6 col-md-1 col-lg-1">
-        <button id="" type="button" class="btn btn-primary btn-block">Ubicación</button>
+        <button id="" type="button" class="btn btn-primary btn-block">
+          <center>
+            <img src="<?php echo base_url('assets/img/ubicacion.svg'); ?>" alt="" class="img-responsive icono">
+            Ubicación
+         </center>
+      </button>
       </div>
       <div class="col-xs-6 col-sm-6 col-md-1 col-lg-1">
-        <button id="" type="button" class="btn btn-primary btn-block">Indicadores</button>
+        <!-- <button id="" type="button" class="btn btn-primary btn-block">Indicadores</button> -->
+        <button id="" type="button" class="btn btn-primary btn-block">
+          <center>
+            <img src="<?php echo base_url('assets/img/indicadores.svg'); ?>" alt="" class="img-responsive icono">
+            Indicadores
+         </center>
+      </button>
       </div>
     </center>
   </div><!-- row -->
@@ -79,10 +134,21 @@
 
         <div class="row margintop10">
           <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-            <button id="" type="button" class="btn btn-primary btn-block">Editar</button>
+            <button id="" type="button" class="btn btn-primary btn-block">
+              <center>
+                <img src="<?php echo base_url('assets/img/editar.svg'); ?>" alt="" class="img-responsive icono">
+                Editar
+              </center>
+            </button>
           </div>
           <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-            <button id="" type="button" class="btn btn-primary btn-block">Imprimir</button>
+            <!-- <button id="" type="button" class="btn btn-primary btn-block"></button> -->
+            <button id="" type="button" class="btn btn-primary btn-block">
+              <center>
+                <img src="<?php echo base_url('assets/img/imprimir.svg'); ?>" alt="" class="img-responsive icono">
+                Imprimir
+              </center>
+            </button>
           </div>
         </div><!-- row -->
 

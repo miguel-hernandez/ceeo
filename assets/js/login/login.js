@@ -7,8 +7,8 @@
                 clave: {required: true}
             },
             messages: {
-                username: {required: " *es requerido"},
-                clave: {required: " *es requerido"}
+                username: {required: "Campo requerido"},
+                clave: {required: "Campo requerido"}
             }
         });
 
