@@ -16,6 +16,24 @@ class Visitador extends CI_Controller {
 	{
       if(Utilerias::verifica_sesion_redirige($this)){
         $data["titulo"] = "VISITADOR";
+        $usuario = $this->session->userdata[DATOSUSUARIO];
+        // echo "<pre>"; print_r($usuario); die();
+        switch ($usuario["idtipousuario"]) {
+          case UVISITADOR:
+            $tipo = "VISITADOR: ";
+          break;
+          case UCOORDINADOR:
+            $tipo = "COORDINADOR: ";
+          break;
+          case UADMINISTRADOR:
+            $tipo = "ADMINISTRADOR: ";
+          break;
+        }
+        // $tipo =
+        $data["usuario"] = $tipo.$usuario["nombre"]." ".$usuario["paterno"]." ".$usuario["materno"];
+
+
+
         Utilerias::pagina_basica($this, "visitador/index", $data);
       }
 	}//

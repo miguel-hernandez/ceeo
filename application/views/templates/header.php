@@ -48,6 +48,10 @@
       <div class="collapse navbar-collapse navbar_master" id="NavComponents" style="margin-right:18px;">
         <!-- Navbar Links -->
         <ul class="nav navbar-nav navbar-right">
+          <li>
+            <a href="index" role="button" aria-haspopup="true" aria-expanded="false" ><?= $usuario ?></a>
+          </li>
+
           <li data-toggle="tooltip" data-placement="left" title="Salir">
             <a href="<?php echo site_url('Login/logout'); ?>" role="button" aria-haspopup="true" aria-expanded="false" ><i class="fa fa-power-off"></i></a>
           </li>
