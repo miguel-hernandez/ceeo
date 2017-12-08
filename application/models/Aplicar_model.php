@@ -4,6 +4,7 @@ class Aplicar_model extends CI_Model {
 
     function __construct() {
         parent::__construct();
+        date_default_timezone_set(ZONAHORARIA);
     }
 
      function get_visitadas($idvisitador)
@@ -41,6 +42,7 @@ class Aplicar_model extends CI_Model {
      }// get_visitadas()
 
      function insert_aplica($idusuario, $idcct, $atendio){
+
       $fecha = date("Y-m-d H:i:s");
       $data = array(
         'idusuario' => $idusuario,

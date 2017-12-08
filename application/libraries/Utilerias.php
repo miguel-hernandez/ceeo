@@ -1,6 +1,8 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
+define("ZONAHORARIA", "America/Mexico_City");
+
 define('DATOSUSUARIO', "datos_usuario_ceeo");
 
 define('UVISITADOR', 1);

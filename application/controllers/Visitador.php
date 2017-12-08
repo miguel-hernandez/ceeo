@@ -58,7 +58,6 @@ class Visitador extends CI_Controller {
        "nvisitas"=>array("type"=>"text", "header"=>"No. visitas"),
        "cct"=>array("type"=>"text", "header"=>"CCT"),
        "nombre_ct"=>array("type"=>"text", "header"=>"Nombre"),
-       "turno"=>array("type"=>"text", "header"=>"Turno"),
        "nombre_nivel"=>array("type"=>"text", "header"=>"Nivel"),
        "nombre_modalidad"=>array("type"=>"text", "header"=>"Modalidad"),
        "domicilio"=>array("type"=>"text", "header"=>"Domicilio")

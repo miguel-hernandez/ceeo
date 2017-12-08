@@ -18,8 +18,8 @@ class Visit_cct_model extends CI_Model {
 
      function get_datos($idvisitador)
      {
-       $str_query = " SELECT ct.idcct AS id, ct.cct, ct.nombre_ct, n.nombre_nivel, m.nombre_modalidad,
-                      ct.domicilio,IF( ap.idcct IS NULL,0,1) AS nvisitas, t.nombre_turno AS turno
+       $str_query = " SELECT ct.idcct AS id, concat_ws(' / ',ct.cct,   LEFT(t.nombre_turno, 1)  ) AS cct, ct.nombre_ct, n.nombre_nivel, m.nombre_modalidad,
+                      ct.domicilio,IF( ap.idcct IS NULL,0,1) AS nvisitas
                       FROM visit_cct vc
                       INNER JOIN usuario us ON us.idusuario = vc.idvisitador
                       INNER JOIN cct ct ON ct.idcct = vc.idcct
