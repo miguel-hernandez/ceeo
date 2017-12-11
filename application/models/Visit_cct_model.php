@@ -38,4 +38,12 @@ class Visit_cct_model extends CI_Model {
       return $this->db->query($query)->result_array();
      }
 
+     function get_cuestions_edita($tipo, $idaplicar){
+      $query = "SELECT * FROM pregunta p
+                INNER JOIN respuesta r ON r.idpregunta = p.idpregunta
+                WHERE r.idaplicar = {$idaplicar} and p.idencuesta = {$tipo}";
+                // echo $query; die();
+      return $this->db->query($query)->result_array();
+     }
+
 }

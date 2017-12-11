@@ -145,10 +145,19 @@ class Visitador extends CI_Controller {
     if(Utilerias::verifica_sesion_redirige($this)){
       $tipo = $this->input->post('tipo');
       $idcct = $this->input->post('idcct');
-      if($tipo == 2){
-        $preguntas = $this->Visit_cct_model->get_cuestions($tipo);
-      }elseif ($tipo == 1) {
-        $preguntas = $this->Visit_cct_model->get_cuestions($tipo);
+      $ideditando = $this->input->post('ideditando');
+      if($ideditando == 0 || $ideditando == '0'){
+        if($tipo == 2){
+          $preguntas = $this->Visit_cct_model->get_cuestions($tipo);
+        }elseif ($tipo == 1) {
+          $preguntas = $this->Visit_cct_model->get_cuestions($tipo);
+        }
+      }else{
+        if($tipo == 2){
+          $preguntas = $this->Visit_cct_model->get_cuestions_edita($tipo, $ideditando);
+        }elseif ($tipo == 1) {
+          $preguntas = $this->Visit_cct_model->get_cuestions_edita($tipo, $ideditando);
+        }
       }
       $response = array(
           "result" => $preguntas,
@@ -161,6 +170,9 @@ class Visitador extends CI_Controller {
   }
 
   function savecuestionario(){
+    // echo "<pre>";
+    // print_r($_POST);
+    // die();
     if(Utilerias::verifica_sesion_redirige($this)){
       $usuario = $this->session->userdata[DATOSUSUARIO];
       $atendio = $this->input->post('atendio');
