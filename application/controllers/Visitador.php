@@ -191,27 +191,29 @@ class Visitador extends CI_Controller {
   }
 
   function get_pdf_encuesta(){
+    // error_reporting(0);
     if(Utilerias::verifica_sesion_redirige($this)){
       $idaplicar = $this->input->post('idaplicar');
-      $obj_pdf = new FPDF; // Creación de la instancia
-
       $result = $this->Aplicar_model->get_pdf_encuesta($idaplicar);
       $datos = $result[0]; // Datos de la escuela
 
+      // $obj_pdf = new FPDF; // Creación de la instancia
+      $obj_pdf = new My_FPDF; // Creación de la instancia
 
+      $obj_pdf->AliasNbPages();
       $obj_pdf->AddPage();
 
       // Arial bold 16
       $obj_pdf->SetFont('Arial','B',16);
       // Logo
-      $obj_pdf->Image(base_url().'assets/img/logosep.png',10,8,33);
+      $obj_pdf->Image(base_url().'assets/img/escudo_puebla.png',10,8,15);
 
       // Movernos a la derecha, 85cm
       $obj_pdf->Cell(85);
       // Título
       $obj_pdf->SetTextColor(28,85,172);
       $obj_pdf->Cell(20,10,'Sistema de seguimiento CEEO',0,1,'C');
-      $obj_pdf->Image(base_url().'assets/img/escudo_puebla.png',180,8,15);
+      $obj_pdf->Image(base_url().'assets/img/logosep.png',168,8,33);
 
       // Salto de línea
       $obj_pdf->Ln(5);
@@ -226,6 +228,8 @@ class Visitador extends CI_Controller {
 
       $obj_pdf->SetY(40); // Inicio
       $obj_pdf->MultiCell(0,5,utf8_decode('CCT: '.$datos['cct']."     Turno: " . $datos['turno'] ."     Escuela: ". $datos['nombre_ct']. " (".$datos['domicilio'].")"),0,"L");
+
+      $obj_pdf->Line(5, 51 , 205, 51);  //Horizontal
 
       $obj_pdf->Ln(5);
       $tema_actual = $datos["idtema"];
@@ -278,7 +282,19 @@ class Visitador extends CI_Controller {
         $obj_pdf->Ln(5);
 
       }
-      // die();
+
+      $obj_pdf->SetY(-40);
+      // $obj_pdf->Ln(40);
+      $obj_pdf->SetFont('Arial','B',12);
+      $obj_pdf->SetTextColor(0,0,0);
+      $obj_pdf->MultiCell(0,5,utf8_decode('Nombre y firma'),0,"C");
+
+      $usuario = $this->session->userdata[DATOSUSUARIO];
+
+      // echo "<pre>"; print_r($usuario); die();
+      $obj_pdf->MultiCell(0,5,utf8_decode('['.$usuario["nombre"].' '.$usuario["paterno"].' '.$usuario["materno"].']'),0,"C");
+
+
       $obj_pdf->Output();
 
     }
