@@ -146,6 +146,7 @@ class Visitador extends CI_Controller {
       $tipo = $this->input->post('tipo');
       $idcct = $this->input->post('idcct');
       $ideditando = $this->input->post('ideditando');
+      $editando = false;
       if($ideditando == 0 || $ideditando == '0'){
         if($tipo == 2){
           $preguntas = $this->Visit_cct_model->get_cuestions($tipo);
@@ -158,8 +159,10 @@ class Visitador extends CI_Controller {
         }elseif ($tipo == 1) {
           $preguntas = $this->Visit_cct_model->get_cuestions_edita($tipo, $ideditando);
         }
+        $editando = true;
       }
       $response = array(
+          "editando" => $editando,
           "result" => $preguntas,
           "idcct" => $idcct,
           "atendio" => $tipo
@@ -184,6 +187,27 @@ class Visitador extends CI_Controller {
         $idpregunta = $porciones[0];
         $tipopregunta = $porciones[1];
         $inserto = $this->Respuestas_model->insert_response($idpregunta, $value, $idaplica, $tipopregunta);
+      }
+    }
+    redirect('login/index');
+    }
+  }
+
+  function updatequestion(){
+    // echo "<pre>";
+    // print_r($_POST);
+    // die();
+    if(Utilerias::verifica_sesion_redirige($this)){
+      $usuario = $this->session->userdata[DATOSUSUARIO];
+      $atendio = $this->input->post('atendio');
+      $idaplica = $this->input->post('idcct');
+    // $idaplica = $this->Aplicar_model->insert_aplica($usuario['idusuario'], $idcct, $atendio);
+    foreach ($_POST as $key => $value) {
+      if($key != 'atendio' && $key != 'idcct'){
+        $porciones = explode("-", $key);
+        $idpregunta = $porciones[0];
+        $tipopregunta = $porciones[1];
+        $inserto = $this->Respuestas_model->update_response($idpregunta, $value, $idaplica, $tipopregunta);
       }
     }
     redirect('login/index');

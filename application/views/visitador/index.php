@@ -168,7 +168,7 @@ body{
     <div class="modal-content">
       <div class="modal-header modal_head">
         <button type="button" class="close bold_white" id="modal_visitador_editar_btn_cerrar" aria-hidden="true">&times;</button>
-        <h4 class="modal-title">Registro</h4>
+        <h4 class="modal-title">Actualiza Registro</h4>
       </div>
       <div class="modal-body">
 

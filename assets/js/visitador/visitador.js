@@ -1,37 +1,4 @@
 $(function() {
-  $.validator.addMethod("valueNotEquals", function(value, element, arg){
-       return arg !== value;
-    });
-
-    $("#form_recepcion").validate({
-        onclick:false, onfocusout: false, onkeypress:false, onkeydown:false, onkeyup:false,
-        rules: {
-            autor_libro: {required: true},
-            n_solicitante: {required: true},
-            p_solicitante: {required: true},
-            a_solicitante: {required: true},
-            titulo_academico: { valueNotEquals: "0" },
-            dependencia: {required: true},
-            departamento: {required: true},
-            puesto: {required: true, minlength: 5},
-            n_oficio: {required: true},
-            solicitud: {required: true},
-            observaciones: {required: true}
-        },
-        messages: {
-            autor_libro: {required: " *Seleccione un autor"},
-            n_solicitante: {required: " *es requerido"},
-            p_solicitante: {required: " *es requerido"},
-            a_solicitante: {required: " *es requerido"},
-            titulo_academico: { valueNotEquals: "Seleccione una opción" },
-            dependencia: { required: " *es requerido" },
-            departamento: { required: " *es requerido" },
-            puesto: { required: " *es requerido", minlength: "*almenos 5 caracteres" },
-            n_oficio: {required: "*es requerido"},
-            solicitud: {required: "*es requerido"},
-            observaciones: {required: "*es requerido"}
-        }
-    });
   obj_message = new Message();
   obj_visitador = new Visitador();
   obj_visitador.read();
@@ -170,73 +137,136 @@ function Visitador(){
       var idcct = data.idcct;
       var atendio = data.atendio;
       var arr_datos = data.result;
+      var editando = data.editando;
+      var method_operation = (editando == false || editando == "false")?"savecuestionario":"updatequestion";
       console.table(arr_datos);
       var tema1 = tema2 = tema3 = tema4 = tema5 = tema6 = false;
-
       html_doc="";
 
       html_doc+="<div class='row'>";
       html_doc+="<div class='container-fluid'>";
-      html_doc+="<form action='savecuestionario' method='post' id='form_cuestionario_doc'>";
+      html_doc+="<form action='"+method_operation+"' method='post' id='form_cuestionario_doc'>";
       html_doc+= "<center><label id='aviso' style='color:red;'></label></center>";
-      for(var i = 0; i < arr_datos.length; i++){
-        switch(arr_datos[i]['idtema']) {
-            case '1':
-            if(tema1 == false){
-              html_doc+="<label class='margintop10' id='aviso' style='color:#ef6c00;'>DATOS GENERALES</label>";
-              html_doc+= obj_visitador.return_question(arr_datos[i]);
-              tema1 = true;
-            }else{
-              html_doc+= obj_visitador.return_question(arr_datos[i]);
-            }
-                break;
-            case '2':
-            if(tema2 == false){
-              html_doc+="<label class='margintop10' id='aviso' style='color:#ef6c00;'>CONOCIMIENTOS DE LOS RESULTADOS ESCOLARES PLANEA</label>";
-              html_doc+= obj_visitador.return_question(arr_datos[i]);
-              tema2 = true;
-            }else{
-              html_doc+= obj_visitador.return_question(arr_datos[i]);
-            }
-                break;
-            case '3':
-            if(tema3 == false){
-              html_doc+="<label class='margintop10' id='aviso' style='color:#ef6c00;'>COMPRENCIÓN Y SOCIALIZACIÓN DE LA ESTRATEGIA ESTATAL</label>";
-              html_doc+= obj_visitador.return_question(arr_datos[i]);
-              tema3 = true;
-            }else{
-              html_doc+= obj_visitador.return_question(arr_datos[i]);
-            }
-                break;
-            case '4':
-            if(tema4 == false){
-              html_doc+="<label class='margintop10' id='aviso' style='color:#ef6c00;'>ACCIONES CON MEJORES RESULTADOS</label>";
-              html_doc+= obj_visitador.return_question(arr_datos[i]);
-              tema4 = true;
-            }else{
-              html_doc+= obj_visitador.return_question(arr_datos[i]);
-            }
-                break;
-            case '5':
-            if(tema5 == false){
-              html_doc+="<label class='margintop10' id='aviso' style='color:#ef6c00;'>APOYOS REQUERIDOS</label>";
-              html_doc+= obj_visitador.return_question(arr_datos[i]);
-              tema5 = true;
-            }else{
-              html_doc+= obj_visitador.return_question(arr_datos[i]);
-            }
-                break;
-            case '6':
-            if(tema6 == false){
-              html_doc+="<label class='margintop10' id='aviso' style='color:#ef6c00;'>PERFIL DE LOS DOCENTES</label>";
-              html_doc+= obj_visitador.return_question(arr_datos[i]);
-              tema6 = true;
-            }else{
-              html_doc+= obj_visitador.return_question(arr_datos[i]);
-            }
-                break;
-        }
-      }//fin for
+
+      if(editando == false || editando == "false"){
+        for(var i = 0; i < arr_datos.length; i++){
+          switch(arr_datos[i]['idtema']) {
+              case '1':
+              if(tema1 == false){
+                html_doc+="<label class='margintop10' id='aviso' style='color:#ef6c00;'>DATOS GENERALES</label>";
+                html_doc+= obj_visitador.return_question(arr_datos[i], editando);
+                tema1 = true;
+              }else{
+                html_doc+= obj_visitador.return_question(arr_datos[i], editando);
+              }
+                  break;
+              case '2':
+              if(tema2 == false){
+                html_doc+="<label class='margintop10' id='aviso' style='color:#ef6c00;'>CONOCIMIENTOS DE LOS RESULTADOS ESCOLARES PLANEA</label>";
+                html_doc+= obj_visitador.return_question(arr_datos[i], editando);
+                tema2 = true;
+              }else{
+                html_doc+= obj_visitador.return_question(arr_datos[i], editando);
+              }
+                  break;
+              case '3':
+              if(tema3 == false){
+                html_doc+="<label class='margintop10' id='aviso' style='color:#ef6c00;'>COMPRENCIÓN Y SOCIALIZACIÓN DE LA ESTRATEGIA ESTATAL</label>";
+                html_doc+= obj_visitador.return_question(arr_datos[i], editando);
+                tema3 = true;
+              }else{
+                html_doc+= obj_visitador.return_question(arr_datos[i], editando);
+              }
+                  break;
+              case '4':
+              if(tema4 == false){
+                html_doc+="<label class='margintop10' id='aviso' style='color:#ef6c00;'>ACCIONES CON MEJORES RESULTADOS</label>";
+                html_doc+= obj_visitador.return_question(arr_datos[i], editando);
+                tema4 = true;
+              }else{
+                html_doc+= obj_visitador.return_question(arr_datos[i], editando);
+              }
+                  break;
+              case '5':
+              if(tema5 == false){
+                html_doc+="<label class='margintop10' id='aviso' style='color:#ef6c00;'>APOYOS REQUERIDOS</label>";
+                html_doc+= obj_visitador.return_question(arr_datos[i], editando);
+                tema5 = true;
+              }else{
+                html_doc+= obj_visitador.return_question(arr_datos[i], editando);
+              }
+                  break;
+              case '6':
+              if(tema6 == false){
+                html_doc+="<label class='margintop10' id='aviso' style='color:#ef6c00;'>PERFIL DE LOS DOCENTES</label>";
+                html_doc+= obj_visitador.return_question(arr_datos[i], editando);
+                tema6 = true;
+              }else{
+                html_doc+= obj_visitador.return_question(arr_datos[i], editando);
+              }
+                  break;
+          }
+        }//fin for
+      }else{
+        for(var i = 0; i < arr_datos.length; i++){
+          switch(arr_datos[i]['idtema']) {
+              case '1':
+              if(tema1 == false){
+                html_doc+="<label class='margintop10' id='aviso' style='color:#ef6c00;'>DATOS GENERALES</label>";
+                html_doc+= obj_visitador.return_question(arr_datos[i], editando);
+                tema1 = true;
+              }else{
+                html_doc+= obj_visitador.return_question(arr_datos[i], editando);
+              }
+                  break;
+              case '2':
+              if(tema2 == false){
+                html_doc+="<label class='margintop10' id='aviso' style='color:#ef6c00;'>CONOCIMIENTOS DE LOS RESULTADOS ESCOLARES PLANEA</label>";
+                html_doc+= obj_visitador.return_question(arr_datos[i], editando);
+                tema2 = true;
+              }else{
+                html_doc+= obj_visitador.return_question(arr_datos[i], editando);
+              }
+                  break;
+              case '3':
+              if(tema3 == false){
+                html_doc+="<label class='margintop10' id='aviso' style='color:#ef6c00;'>COMPRENCIÓN Y SOCIALIZACIÓN DE LA ESTRATEGIA ESTATAL</label>";
+                html_doc+= obj_visitador.return_question(arr_datos[i], editando);
+                tema3 = true;
+              }else{
+                html_doc+= obj_visitador.return_question(arr_datos[i], editando);
+              }
+                  break;
+              case '4':
+              if(tema4 == false){
+                html_doc+="<label class='margintop10' id='aviso' style='color:#ef6c00;'>ACCIONES CON MEJORES RESULTADOS</label>";
+                html_doc+= obj_visitador.return_question(arr_datos[i], editando);
+                tema4 = true;
+              }else{
+                html_doc+= obj_visitador.return_question(arr_datos[i], editando);
+              }
+                  break;
+              case '5':
+              if(tema5 == false){
+                html_doc+="<label class='margintop10' id='aviso' style='color:#ef6c00;'>APOYOS REQUERIDOS</label>";
+                html_doc+= obj_visitador.return_question(arr_datos[i], editando);
+                tema5 = true;
+              }else{
+                html_doc+= obj_visitador.return_question(arr_datos[i], editando);
+              }
+                  break;
+              case '6':
+              if(tema6 == false){
+                html_doc+="<label class='margintop10' id='aviso' style='color:#ef6c00;'>PERFIL DE LOS DOCENTES</label>";
+                html_doc+= obj_visitador.return_question(arr_datos[i], editando);
+                tema6 = true;
+              }else{
+                html_doc+= obj_visitador.return_question(arr_datos[i], editando);
+              }
+                  break;
+          }
+        }//fin for
+      }
       html_doc+="<input type='hidden' name='atendio' value="+atendio+" >";
       html_doc+="<input type='hidden' name='idcct' value="+idcct+" >";
       html_doc+="<div class='col-xs-1 pull-right margintop10'><input type='submit' value='Grabar' class='btn btn-primary'></div>";
@@ -252,58 +282,129 @@ function Visitador(){
     });
   }
 
-  this.return_question = function(pregunta){
+  this.return_question = function(pregunta, editando){
     var html_doc = "";
     
         if(pregunta['idtipopregunta'] == 1 || pregunta['idtipopregunta'] == "1"){
-          html_doc += "<div class='row margintop10'>";
-          html_doc +="<div class='col-xs-8'><label >"+pregunta['npregunta']+".- "+pregunta['pregunta']+"</label></div>";
-          html_doc +="<div class='col-xs-2'>";
-          html_doc+= "<label class='checkbox-inline'>";
-          html_doc+= "<input type='radio' id='checkboxEnLinea1' class='requerido' value='si' name='"+pregunta['idpregunta']+"-"+pregunta['idtipopregunta']+"'> SI";
-          html_doc+= "</label>";
-          html_doc+= "<label class='checkbox-inline'>";
-          html_doc+= "<input type='radio' id='checkboxEnLinea2' class='requerido' value='no' name='"+pregunta['idpregunta']+"-"+pregunta['idtipopregunta']+"'> NO";
-          html_doc+= "</label>";
-          html_doc +="</div>";
-          html_doc+= "<div class='col-xs-2'><label id='label_"+pregunta['idpregunta']+"-"+pregunta['idtipopregunta']+"' style='color:red;'></label></div>";
-          html_doc +="</div>";
-        }else if(pregunta['idtipopregunta'] == 2 || pregunta['idtipopregunta'] == "2"){
-          // console.log(arr_datos);
-          if(pregunta['npregunta'] == '1' || pregunta['npregunta'] == 1){
+          if(editando == true || editando == "true"){
+            if(pregunta['respuesta'] == "si"){
+              var resp_si = "checked";
+              var resp_no = "";
+            }else{
+              var resp_si = "";
+              var resp_no = "checked";
+            }
             html_doc += "<div class='row margintop10'>";
-            html_doc +="<div class='col-xs-12'><label>"+pregunta['npregunta']+".- "+pregunta['pregunta']+"</label></div>";
+            html_doc +="<div class='col-xs-8'><label >"+pregunta['npregunta']+".- "+pregunta['pregunta']+"</label></div>";
             html_doc +="<div class='col-xs-2'>";
-            html_doc+= "<input class='form-control requerido' type='Number' name='"+pregunta['idpregunta']+"-"+pregunta['idtipopregunta']+"'>";
-            // html_doc+="<textarea class='form-control requerido' rows='3' name='"+pregunta['idpregunta']+"-"+pregunta['idtipopregunta']+"'></textarea>";
+            html_doc+= "<label class='checkbox-inline'>";
+            html_doc+= "<input type='radio' id='checkboxEnLinea1' class='requerido' value='si' name='"+pregunta['idpregunta']+"-"+pregunta['idtipopregunta']+"'"+resp_si+"> SI";
+            html_doc+= "</label>";
+            html_doc+= "<label class='checkbox-inline'>";
+            html_doc+= "<input type='radio' id='checkboxEnLinea2' class='requerido' value='no' name='"+pregunta['idpregunta']+"-"+pregunta['idtipopregunta']+"'"+resp_no+"> NO";
+            html_doc+= "</label>";
             html_doc +="</div>";
+            html_doc+= "<div class='col-xs-2'><label id='label_"+pregunta['idpregunta']+"-"+pregunta['idtipopregunta']+"' style='color:red;'></label></div>";
             html_doc +="</div>";
           }else{
             html_doc += "<div class='row margintop10'>";
-            html_doc +="<div class='col-xs-12'><label>"+pregunta['npregunta']+".- "+pregunta['pregunta']+"</label></div>";
+            html_doc +="<div class='col-xs-8'><label >"+pregunta['npregunta']+".- "+pregunta['pregunta']+"</label></div>";
+            html_doc +="<div class='col-xs-2'>";
+            html_doc+= "<label class='checkbox-inline'>";
+            html_doc+= "<input type='radio' id='checkboxEnLinea1' class='requerido' value='si' name='"+pregunta['idpregunta']+"-"+pregunta['idtipopregunta']+"'> SI";
+            html_doc+= "</label>";
+            html_doc+= "<label class='checkbox-inline'>";
+            html_doc+= "<input type='radio' id='checkboxEnLinea2' class='requerido' value='no' name='"+pregunta['idpregunta']+"-"+pregunta['idtipopregunta']+"'> NO";
+            html_doc+= "</label>";
+            html_doc +="</div>";
+            html_doc+= "<div class='col-xs-2'><label id='label_"+pregunta['idpregunta']+"-"+pregunta['idtipopregunta']+"' style='color:red;'></label></div>";
+            html_doc +="</div>";
+          }
+        }else if(pregunta['idtipopregunta'] == 2 || pregunta['idtipopregunta'] == "2"){
+          // console.log(arr_datos);
+          if(editando == true || editando == "true"){
+              if(pregunta['npregunta'] == '1' || pregunta['npregunta'] == 1){
+              html_doc += "<div class='row margintop10'>";
+              html_doc +="<div class='col-xs-12'><label>"+pregunta['npregunta']+".- "+pregunta['pregunta']+"</label></div>";
+              html_doc +="<div class='col-xs-2'>";
+              html_doc+= "<input class='form-control requerido' type='Number' name='"+pregunta['idpregunta']+"-"+pregunta['idtipopregunta']+"' value='"+pregunta['complemento']+"'>";
+              // html_doc+="<textarea class='form-control requerido' rows='3' name='"+pregunta['idpregunta']+"-"+pregunta['idtipopregunta']+"'></textarea>";
+              html_doc +="</div>";
+              html_doc +="</div>";
+            }else{
+              html_doc += "<div class='row margintop10'>";
+              html_doc +="<div class='col-xs-12'><label>"+pregunta['npregunta']+".- "+pregunta['pregunta']+"</label></div>";
+              html_doc +="<div class='col-xs-12'>";
+              // html_doc+= "<input class='form-control requerido' name='"+pregunta['idpregunta']+"-"+pregunta['idtipopregunta']+"'>";
+              html_doc+="<textarea class='form-control requerido' rows='3' name='"+pregunta['idpregunta']+"-"+pregunta['idtipopregunta']+"'>"+pregunta['complemento']+"</textarea>";
+              html_doc +="</div>";
+              html_doc +="</div>";
+            }
+          }else{
+            if(pregunta['npregunta'] == '1' || pregunta['npregunta'] == 1){
+              html_doc += "<div class='row margintop10'>";
+              html_doc +="<div class='col-xs-12'><label>"+pregunta['npregunta']+".- "+pregunta['pregunta']+"</label></div>";
+              html_doc +="<div class='col-xs-2'>";
+              html_doc+= "<input class='form-control requerido' type='Number' name='"+pregunta['idpregunta']+"-"+pregunta['idtipopregunta']+"'>";
+              // html_doc+="<textarea class='form-control requerido' rows='3' name='"+pregunta['idpregunta']+"-"+pregunta['idtipopregunta']+"'></textarea>";
+              html_doc +="</div>";
+              html_doc +="</div>";
+            }else{
+              html_doc += "<div class='row margintop10'>";
+              html_doc +="<div class='col-xs-12'><label>"+pregunta['npregunta']+".- "+pregunta['pregunta']+"</label></div>";
+              html_doc +="<div class='col-xs-12'>";
+              // html_doc+= "<input class='form-control requerido' name='"+pregunta['idpregunta']+"-"+pregunta['idtipopregunta']+"'>";
+              html_doc+="<textarea class='form-control requerido' rows='3' name='"+pregunta['idpregunta']+"-"+pregunta['idtipopregunta']+"'></textarea>";
+              html_doc +="</div>";
+              html_doc +="</div>";
+            }
+          }
+        }else if(pregunta['idtipopregunta'] == 3 || pregunta['idtipopregunta'] == "3"){
+          if(editando == true || editando == "true"){
+            if(pregunta['respuesta'] == "si"){
+              var resp_si = "checked";
+              var resp_no = "";
+              var cad_respuesta = "<textarea class='form-control requerido' rows='3' name='"+pregunta['idpregunta']+"-"+pregunta['idtipopregunta']+"'>"+pregunta['complemento']+"</textarea>";
+            }else{
+              var resp_si = "";
+              var resp_no = "checked";
+              var cad_respuesta = "<textarea class='form-control requerido' rows='3' name='"+pregunta['idpregunta']+"-"+pregunta['idtipopregunta']+"'></textarea>";
+            }
+
+            html_doc += "<div class='row margintop10'>";
+            html_doc +="<div class='col-xs-8'><label>"+pregunta['npregunta']+".- "+pregunta['pregunta']+"</label></div>";
+            html_doc +="<div class='col-xs-2'>";
+            html_doc+= "<label class='checkbox-inline'>";
+            html_doc+= "<input type='radio' id='checkboxEnLinea1' class='requerido' value='si' name='"+pregunta['idpregunta']+"-"+pregunta['idtipopregunta']+"'"+resp_si+"> SI";
+            html_doc+= "</label>";
+            html_doc+= "<label class='checkbox-inline'>";
+            html_doc+= "<input type='radio' id='checkboxEnLinea2' class='requerido' value='no' name='"+pregunta['idpregunta']+"-"+pregunta['idtipopregunta']+"'"+resp_no+"> NO";
+            html_doc+= "</label>";
+            html_doc +="</div>";//cierra div checks
+            html_doc+= "<div class='col-xs-2'><label id='label_"+pregunta['idpregunta']+"-"+pregunta['idtipopregunta']+"' style='color:red;'></label></div>";
+            html_doc +="<div class='col-xs-12'>";
+            // html_doc+= "<input class='form-control requerido' name='"+pregunta['idpregunta']+"-"+pregunta['idtipopregunta']+"'>";
+            html_doc+=cad_respuesta;
+            html_doc +="</div>";
+            html_doc +="</div>";//cierra div class row
+          }else{
+            html_doc += "<div class='row margintop10'>";
+            html_doc +="<div class='col-xs-8'><label>"+pregunta['npregunta']+".- "+pregunta['pregunta']+"</label></div>";
+            html_doc +="<div class='col-xs-2'>";
+            html_doc+= "<label class='checkbox-inline'>";
+            html_doc+= "<input type='radio' id='checkboxEnLinea1' class='requerido' value='si' name='"+pregunta['idpregunta']+"-"+pregunta['idtipopregunta']+"'> SI";
+            html_doc+= "</label>";
+            html_doc+= "<label class='checkbox-inline'>";
+            html_doc+= "<input type='radio' id='checkboxEnLinea2' class='requerido' value='no' name='"+pregunta['idpregunta']+"-"+pregunta['idtipopregunta']+"'> NO";
+            html_doc+= "</label>";
+            html_doc +="</div>";//cierra div checks
+            html_doc+= "<div class='col-xs-2'><label id='label_"+pregunta['idpregunta']+"-"+pregunta['idtipopregunta']+"' style='color:red;'></label></div>";
             html_doc +="<div class='col-xs-12'>";
             // html_doc+= "<input class='form-control requerido' name='"+pregunta['idpregunta']+"-"+pregunta['idtipopregunta']+"'>";
             html_doc+="<textarea class='form-control requerido' rows='3' name='"+pregunta['idpregunta']+"-"+pregunta['idtipopregunta']+"'></textarea>";
             html_doc +="</div>";
-            html_doc +="</div>";
+            html_doc +="</div>";//cierra div class row
           }
-        }else if(pregunta['idtipopregunta'] == 3 || pregunta['idtipopregunta'] == "3"){
-          html_doc += "<div class='row margintop10'>";
-          html_doc +="<div class='col-xs-8'><label>"+pregunta['npregunta']+".- "+pregunta['pregunta']+"</label></div>";
-          html_doc +="<div class='col-xs-2'>";
-          html_doc+= "<label class='checkbox-inline'>";
-          html_doc+= "<input type='radio' id='checkboxEnLinea1' class='requerido' value='si' name='"+pregunta['idpregunta']+"-"+pregunta['idtipopregunta']+"'> SI";
-          html_doc+= "</label>";
-          html_doc+= "<label class='checkbox-inline'>";
-          html_doc+= "<input type='radio' id='checkboxEnLinea2' class='requerido' value='no' name='"+pregunta['idpregunta']+"-"+pregunta['idtipopregunta']+"'> NO";
-          html_doc+= "</label>";
-          html_doc +="</div>";//cierra div checks
-          html_doc+= "<div class='col-xs-2'><label id='label_"+pregunta['idpregunta']+"-"+pregunta['idtipopregunta']+"' style='color:red;'></label></div>";
-          html_doc +="<div class='col-xs-12'>";
-          // html_doc+= "<input class='form-control requerido' name='"+pregunta['idpregunta']+"-"+pregunta['idtipopregunta']+"'>";
-          html_doc+="<textarea class='form-control requerido' rows='3' name='"+pregunta['idpregunta']+"-"+pregunta['idtipopregunta']+"'></textarea>";
-          html_doc +="</div>";
-          html_doc +="</div>";//cierra div class row
         }
 
       return html_doc;
@@ -396,14 +497,39 @@ $("#modal_visitador_btn_cerrar").click(function(e){
 
 $("#modal_visitador_editar_btn_cerrar").click(function(e){
   e.preventDefault();
-  $("#radio_director_visitador_editar").prop('checked', false);
-  $("#radio_docente_visitador_editar").prop('checked', false);
+  // $("#radio_director_visitador_editar").prop('checked', false);
+  // $("#radio_docente_visitador_editar").prop('checked', false);
   $("#div_contenedor_preguntas_editar").empty();
   $("#modal_visitador_editar").modal("hide");
-  obj_visitador.read();
+  rv.read();
 });
 
 $('#div_contenedor_preguntas').on('submit','#form_cuestionario_doc',function(event){
+  var error = 0;
+  $('.requerido').each(function(i, elem){
+    console.log(elem.id);
+    console.log(elem.type);
+    console.log(elem.name);
+    if(elem.type == "radio"){
+      if(!$("input[name="+elem.name+"]:checked").val()) {
+        // alert("falta seleccionar");
+        $('#label_'+elem.name).html('seleccione <br />');
+        error++;
+      }
+    }else{
+      if($(elem).val() == ''){
+      $(elem).css({'border':'1px solid red'});
+      error++;
+      }
+    }
+    });
+  if(error > 0){
+    event.preventDefault();
+    $('#aviso').html('Debe rellenar los campos requeridos <br />');
+    }
+  });
+
+$('#div_contenedor_preguntas_editar').on('submit','#form_cuestionario_doc',function(event){
   var error = 0;
   $('.requerido').each(function(i, elem){
     console.log(elem.id);
