@@ -234,7 +234,7 @@ function Visitador(){
 
   this.return_question = function(pregunta){
     var html_doc = "";
-    
+
         if(pregunta['idtipopregunta'] == 1 || pregunta['idtipopregunta'] == "1"){
           html_doc += "<div class='row margintop10'>";
           html_doc +="<div class='col-xs-8'><label >"+pregunta['npregunta']+".- "+pregunta['pregunta']+"</label></div>";
@@ -301,7 +301,6 @@ function Reportevisitas(){
     var idcct = arr_cct["id"];
     var cct = arr_cct["cct"];
     var nombre_ct = arr_cct["nombre_ct"];
-    var turno = arr_cct["turno"];
 
     console.info("Reportevisitas -> read() idcct");
     console.info(idcct);
@@ -318,7 +317,7 @@ function Reportevisitas(){
     .done(function( data ) {
       swal.close();
       $("#lbl_reportevisitas_nombrect").empty();
-      $("#lbl_reportevisitas_nombrect").append("Escuela: "+nombre_ct+" ("+cct+" / "+turno+")");
+      $("#lbl_reportevisitas_nombrect").append("Escuela: "+nombre_ct+" ("+cct+")");
 
       var arr_datos = data.result;
       var arr_columnas = data.columnas;
@@ -336,7 +335,6 @@ function Reportevisitas(){
   }// read()
 
   this.get_pdf_encuesta = function(idaplicar){
-    alert("idaplicar: "+idaplicar);
     var form = document.createElement("form");
     var element1 = document.createElement("input");
 

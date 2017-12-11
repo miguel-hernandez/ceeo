@@ -181,113 +181,92 @@ class Visitador extends CI_Controller {
   function get_pdf_encuesta(){
     if(Utilerias::verifica_sesion_redirige($this)){
       $idaplicar = $this->input->post('idaplicar');
-      // echo $idaplicar; die();
       $obj_pdf = new FPDF; // Creación de la instancia
 
       $result = $this->Aplicar_model->get_pdf_encuesta($idaplicar);
+      $datos = $result[0]; // Datos de la escuela
 
-      /*
-      [folio] => 7
-      [fecha] => 2017-12-07 17:16:34
-      [atendio] => DIRECTOR
-      [cct] => 21DAI0002Y
-      [nombre_ct] => LICENCIADO BENITO JUAREZ
-      [domicilio] => Domiclio 21DAI0002Y
-      [nombre_modalidad] => INDIGENA
-      [nombre_turno] => MATUTINO
-      [pregunta] => Años de servicio
-      [idtipopregunta] => 2
-      [respuesta] =>
-      [complemento_respuesta] => 3
-      */
-      echo "<pre>"; print_r($result); die();
 
       $obj_pdf->AddPage();
-      // $obj_pdf->SetFont('Arial','B',16);
+
+      // Arial bold 16
+      $obj_pdf->SetFont('Arial','B',16);
       // Logo
       $obj_pdf->Image(base_url().'assets/img/logosep.png',10,8,33);
-      // Arial bold 15
-      $obj_pdf->SetFont('Arial','B',15);
-      // Movernos a la derecha
-      $obj_pdf->Cell(80);
+
+      // Movernos a la derecha, 85cm
+      $obj_pdf->Cell(85);
       // Título
+      $obj_pdf->SetTextColor(28,85,172);
       $obj_pdf->Cell(20,10,'Sistema de seguimiento CEEO',0,1,'C');
       $obj_pdf->Image(base_url().'assets/img/escudo_puebla.png',180,8,15);
 
       // Salto de línea
-      $obj_pdf->Ln(10);
+      $obj_pdf->Ln(5);
+      $obj_pdf->SetFont('Arial','B',11);
+      $obj_pdf->Cell(40,10, utf8_decode('Atendió: '.$datos['atendio']),0,0,"L");
 
-      // Datos de la escuela
-      $datos = $result[0];
-
-      $obj_pdf->SetFont('Arial','B',12);
-      $obj_pdf->Cell(40,10, utf8_decode('Atendió: '.$datos['atendio']));
-      // $obj_pdf->MultiCell(50,10,utf8_decode("Atendió: ".$datos["atendio"]),1,"L");
       $obj_pdf->Cell(40);
+
       $obj_pdf->Cell(20,10,'Folio: '.$datos["folio"],0,0,'C');
-      // $obj_pdf->MultiCell(50,10,utf8_decode("Folio: ".$datos["folio"]),1,"C");
-       // $obj_pdf->Cell(40);
-       // $obj_pdf->MultiCell(0,5,$datos["pregunta"],0);
-      // $obj_pdf->Cell(20,10,utf8_decode('Fecha: '.$datos['fecha']), 10,8,15);
-      // $obj_pdf->Cell(0,0,'fecha: '.$datos["fecha"]);
+
       $obj_pdf->MultiCell(0,10,utf8_decode("Fecha: ".$datos["fecha"]),0,"R");
 
-      // $obj_pdf->SetXY(30.2,30);
-      // $obj_pdf->Text("texto de prueba");
+      $obj_pdf->SetY(40); // Inicio
+      $obj_pdf->MultiCell(0,5,utf8_decode('CCT: '.$datos['cct']."     Turno: " . $datos['turno'] ."     Escuela: ". $datos['nombre_ct']. " (".$datos['domicilio'].")"),0,"L");
 
-
-
-
-      $obj_pdf->Ln(7);
-      $obj_pdf->Cell(40,10, utf8_decode('Datos CCT: '.$datos['cct']." / " . $datos['nombre_turno'] .",     ". $datos['nombre_ct']. " (".$datos['domicilio'].")"));
-      // $obj_pdf->Cell(40,10, utf8_decode(''.$datos['nombre_ct']));
-      // $obj_pdf->Cell(10);
-
-
-
-
-      // $obj_pdf->Cell(40,10, utf8_decode('Fecha: '.$datos['fecha']));
-      $obj_pdf->SetFont('Arial','',12);
-      $obj_pdf->Ln(15);
+      $obj_pdf->Ln(5);
+      $tema_actual = $datos["idtema"];
+      $var = FALSE;
+      $cont = 0;
       foreach ($result as $item) {
+
+        $obj_pdf->SetFont('Arial','B',12);
         $obj_pdf->SetTextColor(0,0,0);
+        if($cont==0){
+          $obj_pdf->MultiCell(0,5,utf8_decode(strtoupper($item["descripcion_tema"])),0);
+          $cont++;
+        }
+
+        if(($item["idtema"]!=$tema_actual) && !$var){
+          $var = TRUE;
+          $tema_actual = trim($item["idtema"]);
+          $obj_pdf->MultiCell(0,5,utf8_decode(strtoupper($item["descripcion_tema"])),0);
+        }else{
+          $var = FALSE;
+        }
+
         switch ($item["idtipopregunta"]) {
           case 1:
-          // $obj_pdf->Ln(5);
-          $obj_pdf->SetFont('Arial','B',12);
-          $obj_pdf->MultiCell(0,5,utf8_decode($item["npregunta"].".- ".$item["pregunta"]),0);
-          $obj_pdf->SetTextColor(6,107,164);
-          $obj_pdf->Ln(1);
-          // $obj_pdf->Cell(0,10,utf8_decode("   ".$item["respuesta"]));
-          $obj_pdf->MultiCell(0,10,utf8_decode("   ".$item["respuesta"]),0);
+
+            $obj_pdf->SetFont('Arial','',12);
+            $obj_pdf->MultiCell(0,5,utf8_decode($item["npregunta"].".- ".$item["pregunta"]),0);
+            $obj_pdf->SetTextColor(0,26,255);
+            $obj_pdf->Ln(1);
+            $obj_pdf->MultiCell(0,5,utf8_decode("   ".$item["respuesta"]),0);
 
           break;
           case 2:
-
-          // $obj_pdf->Ln(5);
-          $obj_pdf->SetFont('Arial','B',12);
-          $obj_pdf->MultiCell(0,5,utf8_decode($item["npregunta"].".- ".$item["pregunta"]),0);
-          $obj_pdf->SetTextColor(6,107,164);
-          $obj_pdf->Ln(1);
-          $obj_pdf->MultiCell(0,10,utf8_decode("   ".$item["complemento_respuesta"]),0);
+            $obj_pdf->SetFont('Arial','',12);
+            $obj_pdf->MultiCell(0,5,utf8_decode($item["npregunta"].".- ".$item["pregunta"]),0);
+            $obj_pdf->SetTextColor(0,26,255);
+            $obj_pdf->Ln(1);
+            $obj_pdf->MultiCell(0,5,utf8_decode("   ".$item["complemento_respuesta"]),0);
 
           break;
           case 3:
-
-          // $obj_pdf->Ln(5);
-          $obj_pdf->SetFont('Arial','B',12);
-          $obj_pdf->MultiCell(0,5,utf8_decode($item["npregunta"].".- ".$item["pregunta"]),0);
-          $obj_pdf->SetTextColor(6,107,164);
-          $obj_pdf->Ln(2);
-          // $obj_pdf->Cell(40,10,utf8_decode("   ".$item["respuesta"]));
-          $obj_pdf->MultiCell(0,10,utf8_decode("   ".$item["respuesta"].", ".$item["complemento_respuesta"]),0);
-          // $obj_pdf->Ln(1);
-          // $obj_pdf->MultiCell(0,5,utf8_decode("   ".$item["complemento_respuesta"]),0);
+            $obj_pdf->SetFont('Arial','',12);
+            $obj_pdf->MultiCell(0,5,utf8_decode($item["npregunta"].".- ".$item["pregunta"]),0);
+            $obj_pdf->SetTextColor(0,26,255);
+            $obj_pdf->Ln(2);
+            $obj_pdf->MultiCell(0,5,utf8_decode("   ".$item["respuesta"].", ".$item["complemento_respuesta"]),0);
 
           break;
         }
         $obj_pdf->Ln(5);
+
       }
+      // die();
       $obj_pdf->Output();
 
     }
