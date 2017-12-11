@@ -19,7 +19,7 @@ class My_FPDF extends FPDF{
     $this->SetFont('Arial','I',8);
     $this->SetTextColor(0,0,0);
     // Número de página
-    $this->Cell(0,10,'Page '.$this->PageNo().'/{nb}',0,0,'R');
+    $this->Cell(0,10,''.$this->PageNo().'/{nb}',0,0,'R');
   }// Footer()
 
 }

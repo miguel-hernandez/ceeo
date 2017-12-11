@@ -255,7 +255,7 @@ class Visitador extends CI_Controller {
 
       $obj_pdf->Line(5, 51 , 205, 51);  //Horizontal
 
-      $obj_pdf->Ln(5);
+      $obj_pdf->Ln();
       $tema_actual = $datos["idtema"];
       $var = FALSE;
       $cont = 0;
