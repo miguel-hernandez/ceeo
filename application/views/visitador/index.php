@@ -134,7 +134,7 @@ body{
 
         <div class="row margintop10">
           <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-            <button id="" type="button" class="btn btn-primary btn-block">
+            <button id="btn_visitador_editar_encuesta" type="button" class="btn btn-primary btn-block">
               <center>
                 <img src="<?php echo base_url('assets/img/editar.svg'); ?>" alt="" class="img-responsive icono">
                 Editar
