@@ -103,10 +103,10 @@ body{
           <div class='col-xs-12'><center><label id="modal_visitador_nombrect"></label></center></div>
           <div class='col-xs-12'><label>Seleccione una seleccion de cuestionario</label></div>
           <label class='checkbox-inline'>
-            <input type='radio' name='opciones' id='radio_director_visitador' onclick='obj_visitador.get_cuestions(1);' value='opcion_1'> Director
+            <input type='radio' name='opciones' id='radio_director_visitador' onclick='obj_visitador.get_cuestions(1, "nuevo", "div_contenedor_preguntas");' value='opcion_1'> Director
           </label>
           <label class='checkbox-inline'>
-            <input type='radio' name='opciones' id='radio_docente_visitador' onclick='obj_visitador.get_cuestions(2);' value='opcion_2'> Docente
+            <input type='radio' name='opciones' id='radio_docente_visitador' onclick='obj_visitador.get_cuestions(2, "nuevo", "div_contenedor_preguntas");' value='opcion_2'> Docente
           </label>
           <input type="hidden" name="atendio" id="idcct" >
         <!-- </div> -->
@@ -162,6 +162,32 @@ body{
     </div><!-- modal-content -->
   </div><!-- modal-dialog -->
 </div> <!--  modal_reportevisitas -->
+
+<div class="modal" id="modal_visitador_editar" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true" data-keyboard="false" data-backdrop="static">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header modal_head">
+        <button type="button" class="close bold_white" id="modal_visitador_editar_btn_cerrar" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">Registro</h4>
+      </div>
+      <div class="modal-body">
+
+          <div class='col-xs-12'><center><label id="modal_visitador_editar_nombrect"></label></center></div>
+          <div class='col-xs-12'><label>Seleccione una seleccion de cuestionario</label></div>
+          <label class='checkbox-inline'>
+            <input type='radio' name='opciones' id='radio_director_visitador_editar' onclick='obj_visitador.get_cuestions(1, "edita", "div_contenedor_preguntas_editar");' value='opcion_1'> Director
+          </label>
+          <label class='checkbox-inline'>
+            <input type='radio' name='opciones' id='radio_docente_visitador_editar' onclick='obj_visitador.get_cuestions(2, "edita", "div_contenedor_preguntas_editar");' value='opcion_2'> Docente
+          </label>
+          <input type="hidden" name="atendio" id="idcct" >
+        <!-- </div> -->
+        <div id= 'div_contenedor_preguntas_editar'></div>
+
+      </div><!-- modal-body -->
+    </div>
+  </div>
+</div><!-- modal_visitador_editar -->
 
 <script src="<?php echo base_url('assets/js/visitador/visitador.js'); ?>"></script>
 <!-- <script src="<?php echo base_url(); ?>js/jquery.validate_vi.js"></script> -->

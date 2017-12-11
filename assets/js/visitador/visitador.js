@@ -66,6 +66,25 @@ $("#btn_visitador_imprimir").click(function(e){
   }
 });
 
+$("#btn_visitador_editar_encuesta").click(function(e){
+  e.preventDefault();
+  var arr_row = obj_grid_rv.get_row_selected();
+  var columnas = obj_grid_rv.columns;
+  if(arr_row.length==0){
+    obj_message.notification("","Seleccione un registro","error");
+  }else{
+    console.log(arr_row);
+    $("#modal_visitador_editar_nombrect").empty();
+    $("#modal_visitador_editar_nombrect").append(arr_row[0]['nombre_ct']+"("+arr_row[0]['cct']+")");
+    $("#idcct").val(arr_row[0]['id']);
+    console.info(arr_row[0]);
+    var tipo_encuesta = (arr_row[0]['atendio'] == "DIRECTOR")? 1 : 2;
+    var id_editando = arr_row[0]['id'];
+    // alert("tipo_encuesta: "+tipo_encuesta);
+    obj_visitador.get_cuestions(tipo_encuesta, "edita", "div_contenedor_preguntas_editar", id_editando);
+    $("#modal_visitador_editar").modal("show");
+  }
+});
 
 $("#btn_visitador_registrar").click(function(e){
   e.preventDefault();
@@ -134,13 +153,14 @@ function Visitador(){
     });
   }// read()
 
-  this.get_cuestions = function(tipo){
+  this.get_cuestions = function(tipo, operacion, contenedor, id=0){
+    // alert(id);
     var html_doc = "";
     var ruta = base_url+"Visitador/get_cuestions";
     $.ajax({
       url:ruta,
       method:"POST",
-      data:{"tipo": tipo, "idcct":$("#idcct").val(), "atendio":tipo},
+      data:{"tipo": tipo, "idcct":$("#idcct").val(), "atendio":tipo, "ideditando":id},
       beforeSend: function( xhr ) {
         obj_message.loading("Descargando datos");
       }
@@ -224,8 +244,8 @@ function Visitador(){
       html_doc+="<div>";
       html_doc+="<div>";
 
-      $("#div_contenedor_preguntas").empty();
-      $("#div_contenedor_preguntas").append(html_doc);
+      $("#"+contenedor).empty();
+      $("#"+contenedor).append(html_doc);
     })
     .fail(function(e) {
       console.error("Error in read()"); console.table(e);
@@ -369,6 +389,15 @@ $("#modal_visitador_btn_cerrar").click(function(e){
   $("#radio_docente_visitador").prop('checked', false);
   $("#div_contenedor_preguntas").empty();
   $("#modal_visitador").modal("hide");
+  obj_visitador.read();
+});
+
+$("#modal_visitador_editar_btn_cerrar").click(function(e){
+  e.preventDefault();
+  $("#radio_director_visitador_editar").prop('checked', false);
+  $("#radio_docente_visitador_editar").prop('checked', false);
+  $("#div_contenedor_preguntas_editar").empty();
+  $("#modal_visitador_editar").modal("hide");
   obj_visitador.read();
 });
 
