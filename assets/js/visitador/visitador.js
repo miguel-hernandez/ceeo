@@ -42,10 +42,15 @@ $("#btn_visitador_editar_encuesta").click(function(e){
   }else{
     console.log(arr_row);
     $("#modal_visitador_editar_nombrect").empty();
-    $("#modal_visitador_editar_nombrect").append(arr_row[0]['nombre_ct']+"("+arr_row[0]['cct']+")");
+    $("#modal_visitador_editar_nombrect").append($("#lbl_reportevisitas_nombrect").text());
     $("#idcct").val(arr_row[0]['id']);
     console.info(arr_row[0]);
     var tipo_encuesta = (arr_row[0]['atendio'] == "DIRECTOR")? 1 : 2;
+    if(tipo_encuesta == 1){
+      $("#radio_director_visitador_editar").attr('checked', true);
+    }else{
+      $("#radio_docente_visitador_editar").attr('checked', true);
+    }
     var id_editando = arr_row[0]['id'];
     // alert("tipo_encuesta: "+tipo_encuesta);
     obj_visitador.get_cuestions(tipo_encuesta, "edita", "div_contenedor_preguntas_editar", id_editando);
@@ -499,7 +504,7 @@ $("#modal_visitador_editar_btn_cerrar").click(function(e){
   // $("#radio_docente_visitador_editar").prop('checked', false);
   $("#div_contenedor_preguntas_editar").empty();
   $("#modal_visitador_editar").modal("hide");
-  rv.read();
+  // rv.read();
 });
 
 $('#div_contenedor_preguntas').on('submit','#form_cuestionario_doc',function(event){

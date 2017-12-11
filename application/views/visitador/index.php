@@ -173,12 +173,12 @@ body{
       <div class="modal-body">
 
           <div class='col-xs-12'><center><label id="modal_visitador_editar_nombrect"></label></center></div>
-          <div class='col-xs-12'><label>Seleccione una seleccion de cuestionario</label></div>
+          <div class='col-xs-12' id="contenedor_check_update"></div>
           <label class='checkbox-inline'>
-            <input type='radio' name='opciones' id='radio_director_visitador_editar' onclick='obj_visitador.get_cuestions(1, "edita", "div_contenedor_preguntas_editar");' value='opcion_1'> Director
+            <input type='radio' name='opciones' id='radio_director_visitador_editar' value='opcion_1' disabled> Director
           </label>
           <label class='checkbox-inline'>
-            <input type='radio' name='opciones' id='radio_docente_visitador_editar' onclick='obj_visitador.get_cuestions(2, "edita", "div_contenedor_preguntas_editar");' value='opcion_2'> Docente
+            <input type='radio' name='opciones' id='radio_docente_visitador_editar'  value='opcion_2' disabled> Docente
           </label>
           <input type="hidden" name="atendio" id="idcct" >
         <!-- </div> -->
