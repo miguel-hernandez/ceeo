@@ -67,9 +67,11 @@ class Aplicar_model extends CI_Model {
                                  ,ct.domicilio
                                  ,mo.nombre_modalidad
                                  ,LEFT(tu.nombre_turno, 1) AS nombre_turno
+                                 ,tu.nombre_turno AS turno
                                  ,pre.pregunta, pre.idtipopregunta, pre.npregunta
                                  ,re.respuesta AS respuesta, re.complemento AS complemento_respuesta
                                  ,te.descripcion_tema
+                                 ,te.idtema
                           FROM aplicar ap
                           INNER JOIN cct ct ON ct.idcct = ap.idcct
                           INNER JOIN turno tu ON tu.id_turno = ct.idturno
