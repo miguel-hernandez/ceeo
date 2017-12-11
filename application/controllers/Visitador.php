@@ -9,6 +9,8 @@ class Visitador extends CI_Controller {
         $this->load->model('Visit_cct_model');
         $this->load->model('Aplicar_model');
         $this->load->model('Respuestas_model');
+        $this->load->library('My_FPDF');
+
     }
 
 
@@ -175,6 +177,62 @@ class Visitador extends CI_Controller {
     redirect('login/index');
     }
   }
+
+  function get_pdf_encuesta(){
+    if(Utilerias::verifica_sesion_redirige($this)){
+      $idaplicar = $this->input->post('idaplicar');
+      // echo $idaplicar; die();
+      $obj_pdf = new FPDF; // Creación de la instancia
+
+      $result = $this->Aplicar_model->get_pdf_encuesta($idaplicar);
+
+      /*
+      [folio] => 7
+      [fecha] => 2017-12-07 17:16:34
+      [atendio] => DIRECTOR
+      [cct] => 21DAI0002Y
+      [nombre_ct] => LICENCIADO BENITO JUAREZ
+      [domicilio] => Domiclio 21DAI0002Y
+      [nombre_modalidad] => INDIGENA
+      [nombre_turno] => MATUTINO
+      [pregunta] => Años de servicio
+      [idtipopregunta] => 2
+      [respuesta] =>
+      [complemento_respuesta] => 3
+      */
+      // echo "<pre>"; print_r($result); die();
+
+      $obj_pdf->AddPage();
+      $obj_pdf->SetFont('Arial','B',16);
+      // Logo
+      $obj_pdf->Image(base_url().'assets/img/logosep.png',10,8,33);
+      // Arial bold 15
+      $obj_pdf->SetFont('Arial','B',15);
+      // Movernos a la derecha
+      $obj_pdf->Cell(80);
+      // Título
+      $obj_pdf->Cell(20,10,'Sistema de seguimiento CEEO',0,1,'C');
+      $obj_pdf->Image(base_url().'assets/img/escudo_puebla.png',180,8,15);
+
+      // Salto de línea
+      $obj_pdf->Ln(20);
+
+      // Datos de la escuela
+      $datos = $result[0];
+      $obj_pdf->SetFont('Arial','',12);
+      $obj_pdf->Cell(40,10, utf8_decode('CCT: '.$datos['cct']));
+      $obj_pdf->Cell(40,10, utf8_decode(''.$datos['nombre_ct']),0,0);
+      // $obj_pdf->Cell(40,10, utf8_decode('Atendió: '.$datos['atendio']));
+
+      // $obj_pdf->Cell(40,10, utf8_decode('Fecha: '.$datos['fecha']));
+
+      $obj_pdf->Ln(20);
+
+      // $obj_pdf->Cell(40,10,'¡Hola, Mundo!'.$idaplicar);
+      $obj_pdf->Output();
+
+    }
+  }// get_pdf_encuesta()
 
 
 }

@@ -54,6 +54,19 @@ $("#btn_visitador_mostrar").click(function(e){
   }
 });
 
+$("#btn_visitador_imprimir").click(function(e){
+  e.preventDefault();
+  var arr_row = obj_grid_rv.get_row_selected();
+  var columnas = obj_grid_rv.columns;
+  if(arr_row.length==0){
+    obj_message.notification("","Seleccione un registro","error");
+  }else{
+    var rv = new Reportevisitas();
+    rv.get_pdf_encuesta(arr_row[0]["id"]);
+  }
+});
+
+
 $("#btn_visitador_registrar").click(function(e){
   e.preventDefault();
   var arr_row = obj_grid.get_row_selected();
@@ -246,6 +259,27 @@ function Reportevisitas(){
       console.error("Error in read()"); console.table(e);
     });
   }// read()
+
+  this.get_pdf_encuesta = function(idaplicar){
+    alert("idaplicar: "+idaplicar);
+    var form = document.createElement("form");
+    var element1 = document.createElement("input");
+
+    form.name = "form_visitador_get_pdf_encuesta";
+    form.id = "form_visitador_get_pdf_encuesta";
+    form.method = "POST";
+    form.target = "_blank";
+
+    form.action = base_url+that_reportevisitas.controlador+"/get_pdf_encuesta";
+
+    element1.type="hidden";
+    element1.value=idaplicar;
+    element1.name="idaplicar";
+    form.appendChild(element1);
+
+    document.body.appendChild(form);
+    form.submit();
+  }// get_pdf_encuesta()
 
 }// Reportevisitas
 

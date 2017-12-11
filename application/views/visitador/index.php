@@ -143,7 +143,7 @@ body{
           </div>
           <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
             <!-- <button id="" type="button" class="btn btn-primary btn-block"></button> -->
-            <button id="" type="button" class="btn btn-primary btn-block">
+            <button id="btn_visitador_imprimir" type="button" class="btn btn-primary btn-block">
               <center>
                 <img src="<?php echo base_url('assets/img/imprimir.svg'); ?>" alt="" class="img-responsive icono">
                 Imprimir
