@@ -31,8 +31,8 @@ class Aplicar_model extends CI_Model {
      {
        $str_query = " SELECT ap.idaplicar AS id, ap.idaplicar AS folio, ap.fcreacion AS fecha,
        CASE ap.atendio
-       WHEN 1 THEN 'DOCENTE'
-       WHEN 2 THEN 'DIRECTOR'
+       WHEN 1 THEN 'DIRECTOR'
+       WHEN 2 THEN 'DOCENTE'
        END atendio
                       FROM aplicar ap
                       WHERE ap.idcct = {$idcct} AND  ap.idusuario = {$idvisitador}
@@ -59,23 +59,26 @@ class Aplicar_model extends CI_Model {
      function get_pdf_encuesta($idaplicar){
            $str_query = " SELECT ap.idaplicar AS folio, ap.fcreacion AS fecha,
                                  CASE ap.atendio
-                                 WHEN 1 THEN 'DOCENTE'
-                                 WHEN 2 THEN 'DIRECTOR'
+                                 WHEN 1 THEN 'DIRECTOR'
+                                 WHEN 2 THEN 'DOCENTE'
                                  END atendio
                                  ,ct.cct
                                  ,ct.nombre_ct
                                  ,ct.domicilio
                                  ,mo.nombre_modalidad
-                                 ,tu.nombre_turno
-                                 ,pre.pregunta, pre.idtipopregunta
+                                 ,LEFT(tu.nombre_turno, 1) AS nombre_turno
+                                 ,pre.pregunta, pre.idtipopregunta, pre.npregunta
                                  ,re.respuesta AS respuesta, re.complemento AS complemento_respuesta
+                                 ,te.descripcion_tema
                           FROM aplicar ap
                           INNER JOIN cct ct ON ct.idcct = ap.idcct
                           INNER JOIN turno tu ON tu.id_turno = ct.idturno
                           INNER JOIN modalidad mo ON mo.id_modalidad = ct.idmodalidad
                           LEFT JOIN respuesta re ON re.idaplicar = ap.idaplicar
                           LEFT JOIN pregunta pre ON pre.idpregunta = re.idpregunta
+                          LEFT JOIN tema te ON te.idtema = pre.idtema
                           WHERE  ap.idaplicar = {$idaplicar}
+                          ORDER BY pre.npregunta
               ";
           return $this->db->query($str_query)->result_array();
      }// get_pdf_encuesta()
