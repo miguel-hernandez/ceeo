@@ -425,8 +425,11 @@ function Visitador(){
     var valor = (tipo==1)?"SI":"NO";
     if(valor == "SI"){
       $("#text_"+obj.id).addClass( "requerido" );
+      $("#text_"+obj.id).attr("disabled", false);
 
     }else if(valor == "NO"){
+      $("#text_"+obj.id).text("");
+      $("#text_"+obj.id).attr("disabled", true);
       $("#text_"+obj.id).removeClass("requerido");
     }
     console.log(obj.id);
