@@ -102,20 +102,22 @@ class Visitador extends CI_Controller {
          array_push($array_aux, $item);
       }
 
+      // echo "<pre>"; print_r($array_aux); die();
+
       $sin_duplicados = array_unique($array_aux, SORT_REGULAR);
       $result_final = $this->re_arma($sin_duplicados);
 
       $result = $this->Visit_cct_model->get_asignadas($idusuario);
 
       $result2 = $this->Aplicar_model->get_visitadas($idusuario);
-      $result3 = $this->Aplicar_model->get_total_visitadas($idusuario);
+      $result3 = $this->Aplicar_model->get_total_visitas($idusuario);
 
+      // $data["asignadas"] = $result[0]["asignadas"];
+      // $data["visitadas"] = $result2[0]["visitadas"];
+      // $data["sin_visitar"] = $result[0]["asignadas"] - $result2[0]["visitadas"];
+      // $data["total_visitas"] = $result3[0]["total_visitadas"];
+      // $data["total_visitas"] = $result3[0]["total_visitadas"];
 
-      $data["asignadas"] = $result[0]["asignadas"];
-      $data["visitadas"] = $result2[0]["visitadas"];
-      $data["sin_visitar"] = $result[0]["asignadas"] - $result2[0]["visitadas"];
-      $data["total_visitas"] = $result3[0]["total_visitadas"];
-      $data["total_visitas"] = $result3[0]["total_visitadas"];
 
       $response = array(
         "result" => $result_final,
@@ -123,8 +125,8 @@ class Visitador extends CI_Controller {
         "asignadas" => $result[0]["asignadas"],
         "visitadas" => $result2[0]["visitadas"],
         "sin_visitar" => $result[0]["asignadas"] - $result2[0]["visitadas"],
-        "total_visitas" => $result3[0]["total_visitadas"],
-        "total_visitas" => $result3[0]["total_visitadas"]
+        "total_visitas" => $result3[0]["total_visitas"],
+
 
       );
 

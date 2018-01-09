@@ -9,7 +9,7 @@ $(function() {
     $("#btn_visitador_editar_encuesta").hide();
     $("#btn_visitador_registrar").hide();
 
-    
+
   }
 });
 
