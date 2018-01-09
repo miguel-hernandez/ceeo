@@ -54,7 +54,6 @@ function Coordinador(){
   that_coordinador.controlador = "Coordinador";
 
   this.read = function(){
-    alert($("#itxt_coordinador_id").val());
     var ruta = base_url+that_coordinador.controlador+"/read";
     $.ajax({
       async: true,
