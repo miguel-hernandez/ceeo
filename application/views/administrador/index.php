@@ -10,6 +10,7 @@ body{
 }
 </style>
 
+
 <div class="container-fluid">
   <div class="row">
     <div class="col-xs-12">
@@ -18,14 +19,18 @@ body{
   </div><!-- row -->
   <div class="row">
   	<div class="col-xs-6 col-sm-6 col-md-1 col-lg-1 pull-right">
-        <button id="btn_administrador_mostrar" type="button" class="btn btn-primary btn-block ">
-          <center>
-            <img src="<?php echo base_url('assets/img/mostrar.svg'); ?>" alt="" class="img-responsive icono">
-            Mostrar
-          </center>
-        </button>
-      </div>
+        <?php echo form_open("Coordinador/index", array("id"=>"form_administrador_mostrar", "target"=>"_blank")); ?>
+          <input id="itxt_administrador_id_coordinador" name="itxt_administrador_id_coordinador" type="hidden">
+          <button id="btn_administrador_mostrar" type="submit" class="btn btn-primary btn-block">
+            <center>
+              <img src="<?php echo base_url('assets/img/mostrar.svg'); ?>" alt="" class="img-responsive icono">
+              Mostrar
+            </center>
+          </button>
+        <?php echo form_close(); ?>
+      </div><!-- col-md-1 -->
   </div>
+
 
   <div class="row margintop10">
     <div class="col-xs-12">

@@ -54,12 +54,13 @@ function Coordinador(){
   that_coordinador.controlador = "Coordinador";
 
   this.read = function(){
+    alert($("#itxt_coordinador_id").val());
     var ruta = base_url+that_coordinador.controlador+"/read";
     $.ajax({
       async: true,
       url: ruta,
       method: 'POST',
-      data: {},
+      data: {"idcoordinador":$("#itxt_coordinador_id").val()},
       beforeSend: function( xhr ) {
         obj_message.loading("Descargando datos");
       }

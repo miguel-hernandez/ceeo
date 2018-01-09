@@ -6,7 +6,7 @@ body{
   width: 30px;
 }
 </style>
-
+<input id="itxt_coordinador_id" name="itxt_coordinador_id" type="hidden"  value="<?= $id_coordinador; ?>">
 <div class="container-fluid">
   <div class="row">
     <div class="col-xs-12">

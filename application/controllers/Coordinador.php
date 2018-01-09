@@ -30,6 +30,16 @@ class Coordinador extends CI_Controller {
             break;
           }
 
+
+        // echo $this->input->post('itxt_administrador_id_coordinador'); die();
+
+        if($this->input->post('itxt_administrador_id_coordinador') != NULL){
+          $data["id_coordinador"] = $this->input->post('itxt_administrador_id_coordinador');
+        }
+        else{
+          $data["id_coordinador"] = 0;
+        }
+
           $data["usuario"] = $tipo.$usuario["nombre"]." ".$usuario["paterno"]." ".$usuario["materno"];
 
           Utilerias::pagina_basica($this, "coordinador/index", $data);
@@ -40,7 +50,14 @@ class Coordinador extends CI_Controller {
       if(Utilerias::verifica_sesion_redirige($this)){
 
         $usuario = $this->session->userdata[DATOSUSUARIO];
-        $result = $this->Coord_visit_model->get_visitadores($usuario["idusuario"]);
+        $idcoordinador = $this->input->post('idcoordinador');
+        // echo $idcoordinador; die();
+        if($idcoordinador==0){
+          $idusuario = $usuario["idusuario"];
+        }else{
+          $idusuario = $idcoordinador;
+        }
+        $result = $this->Coord_visit_model->get_visitadores($idusuario);
 
         $arr_columnas = array(
          "id"=>array("type"=>"hidden", "header"=>"id"),
