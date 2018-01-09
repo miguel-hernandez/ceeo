@@ -6,6 +6,7 @@ class Administrador extends CI_Controller {
     function __construct(){
         parent::__construct();
         $this->load->library('Utilerias');
+        $this->load->model('Administrador_model');
     }
 
 
@@ -32,6 +33,28 @@ class Administrador extends CI_Controller {
           Utilerias::pagina_basica($this, "administrador/index", $data);
         }
     }//
+
+    function read(){
+    if(Utilerias::verifica_sesion_redirige($this)){
+      $usuario = $this->session->userdata[DATOSUSUARIO];
+      $result = $this->Administrador_model->get_coordinadores();
+
+      $arr_columnas = array(
+       "id"=>array("type"=>"hidden", "header"=>"idusuario"),
+       "nombre"=>array("type"=>"text", "header"=>"Nombre"),
+       "email"=>array("type"=>"text", "header"=>"Mail"),
+       "telefono"=>array("type"=>"text", "header"=>"Telefono")
+     );
+
+      $response = array(
+        "result" => $result,
+        "columnas" => $arr_columnas
+      );
+
+      Utilerias::enviaDataJson(200, $response, $this);
+      exit;
+    }
+  }// read()
 
 
 }
