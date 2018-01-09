@@ -97,7 +97,7 @@ function Visitador(){
       async: true,
       url: ruta,
       method: 'POST',
-      data: {},
+      data: {"idvisitador":$("#itxt_visitador_id").val()},
       beforeSend: function( xhr ) {
         obj_message.loading("Descargando datos");
       }

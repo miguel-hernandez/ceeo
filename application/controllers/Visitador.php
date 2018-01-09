@@ -17,6 +17,7 @@ class Visitador extends CI_Controller {
 	public function index()
 	{
       if(Utilerias::verifica_sesion_redirige($this)){
+
         $data["titulo"] = "VISITADOR";
         $usuario = $this->session->userdata[DATOSUSUARIO];
         // echo "<pre>"; print_r($usuario); die();
@@ -35,6 +36,15 @@ class Visitador extends CI_Controller {
         $data["usuario"] = $tipo.$usuario["nombre"]." ".$usuario["paterno"]." ".$usuario["materno"];
 
 
+    // if(isset($this->input->post('itxt_coordinador_id_visitador')){
+    //
+    // }
+        if($this->input->post('itxt_coordinador_id_visitador') != NULL){
+          $data["id_visitador"] = $this->input->post('itxt_coordinador_id_visitador');
+        }
+        else{
+          $data["id_visitador"] = 0;
+        }
 
         Utilerias::pagina_basica($this, "visitador/index", $data);
       }
@@ -52,9 +62,19 @@ class Visitador extends CI_Controller {
     if(Utilerias::verifica_sesion_redirige($this)){
 
       $usuario = $this->session->userdata[DATOSUSUARIO];
-      $result = $this->Visit_cct_model->get_datos($usuario["idusuario"]);
+
+      $idvisitador = $this->input->post('idvisitador');
+      if($idvisitador==0){
+        $idusuario = $usuario["idusuario"];
+      }else{
+        $idusuario = $idvisitador;
+      }
+
+
+
+      $result = $this->Visit_cct_model->get_datos($idusuario);
       $result2 = $result;
-      // $arr_columnas = array("id","nvisitas","cct","nombre_ct","turno", "nombre_nivel","nombre_modalidad","domicilio");
+
       $arr_columnas = array(
        "id"=>array("type"=>"hidden", "header"=>"id"),
        "nvisitas"=>array("type"=>"text", "header"=>"No. visitas"),
@@ -85,10 +105,10 @@ class Visitador extends CI_Controller {
       $sin_duplicados = array_unique($array_aux, SORT_REGULAR);
       $result_final = $this->re_arma($sin_duplicados);
 
-      $result = $this->Visit_cct_model->get_asignadas($usuario["idusuario"]);
+      $result = $this->Visit_cct_model->get_asignadas($idusuario);
 
-      $result2 = $this->Aplicar_model->get_visitadas($usuario["idusuario"]);
-      $result3 = $this->Aplicar_model->get_total_visitadas($usuario["idusuario"]);
+      $result2 = $this->Aplicar_model->get_visitadas($idusuario);
+      $result3 = $this->Aplicar_model->get_total_visitadas($idusuario);
 
 
       $data["asignadas"] = $result[0]["asignadas"];

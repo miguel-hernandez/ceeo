@@ -12,15 +12,10 @@ body{
   font-size: 20px;
   /*font-weight: bold;*/
 }
-.div_white{
-  background: #FFF;
-  padding: 5px;
-  border-radius: 8px;
-  border: 1px solid #DDE4E5;
-}
+
 </style>
 
-
+<input id="itxt_visitador_id" name="itxt_visitador_id" type="text"  value="<?= $id_visitador; ?>">
 <div class="container-fluid">
   <div class="row">
     <div class="col-xs-12">
@@ -31,7 +26,7 @@ body{
   <br>
   <div class="row">
     <center>
-      <!-- <div class="div_white"> -->
+
         <div class="col-xs-6 col-sm-6 col-md-2 col-lg-2">
           <div class="conteo">Asignadas<br><span id="visitador_asignadas"></span></div>
         </div>
@@ -44,7 +39,7 @@ body{
         <div class="col-xs-6 col-sm-6 col-md-2 col-lg-2">
           <div class="conteo">Total visitas<br><span id="visitador_tvisitadas"></span></div>
         </div>
-      <!-- </div> -->
+
 
 
 
