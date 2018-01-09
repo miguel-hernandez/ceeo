@@ -19,7 +19,7 @@ body{
   </div><!-- row -->
   <div class="row">
   	<div class="col-xs-6 col-sm-6 col-md-1 col-lg-1 pull-right">
-        <?php echo form_open("Coordinador/index", array("id"=>"form_administrador_mostrar", "target"=>"_blank")); ?>
+        <?php echo form_open("Coordinador/index", array("id"=>"form_administrador_mostrar", "target"=>"_self")); ?>
           <input id="itxt_administrador_id_coordinador" name="itxt_administrador_id_coordinador" type="hidden">
           <button id="btn_administrador_mostrar" type="submit" class="btn btn-primary btn-block">
             <center>
