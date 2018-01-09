@@ -2,6 +2,15 @@ $(function() {
   obj_message = new Message();
   obj_visitador = new Visitador();
   obj_visitador.read();
+
+  var id_visitador = $("#itxt_visitador_id").val();
+  // alert("id_visitador: "+id_visitador);
+  if(id_visitador>0){
+    $("#btn_visitador_editar_encuesta").hide();
+    $("#btn_visitador_registrar").hide();
+
+    
+  }
 });
 
 
@@ -448,14 +457,16 @@ function Reportevisitas(){
     var cct = arr_cct["cct"];
     var nombre_ct = arr_cct["nombre_ct"];
 
-    console.info("Reportevisitas -> read() idcct");
-    console.info(idcct);
+    var idvisitador = $("#itxt_visitador_id").val();
+
+    // console.info("Reportevisitas -> read() idcct");
+    // console.info(idcct);
     var ruta = base_url+that_reportevisitas.controlador+"/reportevisitas";
     $.ajax({
       async: true,
       url: ruta,
       method: 'POST',
-      data: {"idcct":idcct},
+      data: {"idcct":idcct, "idvisitador":idvisitador},
       beforeSend: function( xhr ) {
         obj_message.loading("Descargando datos");
       }

@@ -15,7 +15,7 @@ body{
 
 </style>
 
-<input id="itxt_visitador_id" name="itxt_visitador_id" type="text"  value="<?= $id_visitador; ?>">
+<input id="itxt_visitador_id" name="itxt_visitador_id" type="hidden" value="<?= $id_visitador; ?>">
 <div class="container-fluid">
   <div class="row">
     <div class="col-xs-12">
@@ -42,7 +42,7 @@ body{
 
 
 
-
+        <!-- pull-right -->
       <div class="col-xs-6 col-sm-6 col-md-1 col-lg-1">
         <button id="btn_visitador_mostrar" type="button" class="btn btn-primary btn-block">
           <center>

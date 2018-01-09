@@ -137,7 +137,6 @@ class Visitador extends CI_Controller {
     if(Utilerias::verifica_sesion_redirige($this)){
       $idcct = $this->input->post('idcct');
 
-      // $arr_columnas = array("id", "folio","fecha","atendio");
       $arr_columnas = array(
          "id"=>array("type"=>"hidden", "header"=>"id"),
          "folio"=>array("type"=>"text", "header"=>"Folio"),
@@ -146,7 +145,15 @@ class Visitador extends CI_Controller {
        );
 
       $usuario = $this->session->userdata[DATOSUSUARIO];
-      $result = $this->Aplicar_model->get_datos_visitadas($idcct,$usuario["idusuario"]);
+
+      if($this->input->post('idvisitador') > 0){
+        $idvisitador = $this->input->post('idvisitador');
+      }
+      else{
+        $idvisitador = $usuario["idusuario"];
+      }
+
+      $result = $this->Aplicar_model->get_datos_visitadas($idcct,$idvisitador);
 
       $response = array(
         "result" => $result,

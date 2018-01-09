@@ -49,7 +49,9 @@
         <!-- Navbar Links -->
         <ul class="nav navbar-nav navbar-right">
           <li>
-            <a href="index" role="button" aria-haspopup="true" aria-expanded="false" ><?= $usuario ?></a>
+
+            <!-- <a href="index" role="button" aria-haspopup="true" aria-expanded="false" ><?= $usuario ?></a> -->
+            <a href="<?php echo base_url() ?>" role="button" aria-haspopup="true" aria-expanded="false" ><?= $usuario ?></a>
           </li>
 
           <li data-toggle="tooltip" data-placement="left" title="Salir">
