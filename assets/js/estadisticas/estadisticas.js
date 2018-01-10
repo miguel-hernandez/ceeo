@@ -57,19 +57,20 @@ var tdirectores = arr_datos.tdirectores;
 var tdocentes = arr_datos.tdocentes;
 
   var data = google.visualization.arrayToDataTable([
-    [total+' ', 'Docentes', 'Directores'],
-    ['', tdocentes, tdirectores]
+    [total+' :)', 'Docentes', 'Directores'],
+    ['Porcentaje encuestas docentes y directores', (tdocentes*100)/total, (tdirectores*100)/total]
   ]);
 
   var options = {
     chart: {
-      title: 'Encuestas aplicadas',
+      title: 'Porcentajes de encuestas aplicadas a docentes y directivos',
       subtitle: ""
     },
     bars: 'vertical',
-    vAxis: {format: 'decimal'},
+    vAxis: {format: '#\'%\''},
     height: 400,
-    colors: ['#1b9e77', '#d95f02', '#7570b3']
+    colors: ['#1b9e77', '#d95f02', '#7570b3'],
+    bar: { groupWidth: "40%" }
   };
 
   var chart = new google.charts.Bar(document.getElementById('chart_div'));
