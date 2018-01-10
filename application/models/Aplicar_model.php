@@ -18,7 +18,7 @@ class Aplicar_model extends CI_Model {
         $str_query = " SELECT COUNT(DISTINCT ap.idcct) AS visitadas
                       FROM aplicar ap
                        INNER JOIN visit_cct vc ON ap.idcct = vc.idcct
-                      WHERE ap.idusuario = 1 AND vc.idvisitador = {$idvisitador}
+                      WHERE ap.idusuario = {$idvisitador} AND vc.idvisitador = {$idvisitador}
            ";
 
           // echo $str_query; die();
@@ -31,7 +31,7 @@ class Aplicar_model extends CI_Model {
        $str_query = "  SELECT COUNT(ap.idcct) AS total_visitas
                       FROM aplicar ap
                       INNER JOIN visit_cct vc ON ap.idcct = vc.idcct
-                      WHERE ap.idusuario = 1 AND vc.idvisitador = {$idvisitador}
+                      WHERE ap.idusuario = {$idvisitador} AND vc.idvisitador = {$idvisitador}
           ";
        /*
        $str_query = " SELECT COUNT(ap.idcct) AS total_visitadas
