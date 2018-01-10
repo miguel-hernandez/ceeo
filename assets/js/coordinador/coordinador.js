@@ -31,13 +31,14 @@ $("#btn_coordinador_mostrar").click(function(e){
 
 $("#btn_coordinador_estadisticas").click(function(e){
   e.preventDefault();
-  var arr_row = obj_grid.get_row_selected();
-  var columnas = obj_grid.columns;
-  if(arr_row.length==0){
-    obj_message.notification("","Seleccione un registro","error");
-  }else{
-    alert("id visitador: "+arr_row[0]["id"]);
-  }
+  // var arr_row = obj_grid.get_row_selected();
+  // var columnas = obj_grid.columns;
+  // if(arr_row.length==0){
+  //   obj_message.notification("","Seleccione un registro","error");
+  // }else{
+  //   alert("id visitador: "+arr_row[0]["id"]);
+  // }
+  $("#modal_estadisticas").modal("show");
 });
 
 
@@ -81,3 +82,28 @@ function Coordinador(){
   }// read()
 
 }// Coordinador
+
+
+
+
+$("#modal_estadisticas_btn_cerrar").click(function(e){
+  e.preventDefault();
+  $("#modal_estadisticas").modal("hide");
+  // $('#idform')[0].reset();
+});
+
+$("#estadisticas_mostrar").click(function(e){
+  e.preventDefault();
+  var tipo = $("#estadisticas_tipo").val();
+  if(tipo==0){
+    obj_message.notification("","Seleccione una opción","error");
+    return false;
+  }
+  else{
+     var obj_est = new Estadisticas();
+     obj_est.get_datos(tipo);
+  }
+
+
+  // $('#idform')[0].reset();
+});

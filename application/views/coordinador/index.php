@@ -49,4 +49,47 @@ body{
 
 </div><!-- container-fluid -->
 
+
+<div class="modal" id="modal_estadisticas" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true" data-keyboard="false" data-backdrop="static">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header modal_head">
+        <button type="button" class="close bold_white" id="modal_estadisticas_btn_cerrar" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">Registro</h4>
+      </div>
+      <div class="modal-body">
+
+        <div class="row ">
+            <div class='col-xs-12'>
+              <!-- <label for="estadisticas_tipo">Seleccione</label> -->
+              <select id="estadisticas_tipo" name="" class="form-control">
+                <option value="0"> Seleccione </option>
+                <option value="1"> Atendio </option>
+                <option value="2"> otro </option>
+              </select>
+            </div>
+        </div>
+
+        <div class="row margintop10">
+            <div class='col-xs-12'>
+              <button id="estadisticas_mostrar" name="" class="btn btn-primary btn-block">Mostrar</button>
+            </div>
+        </div>
+
+
+        <div class="row margintop10">
+            <div class='col-xs-12'>
+              <div id="chart_div"></div>
+            </div>
+        </div>
+
+
+
+      </div><!-- modal-body -->
+    </div>
+  </div>
+</div><!-- modal_estadisticas -->
+
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script src="<?php echo base_url('assets\js\estadisticas\estadisticas.js'); ?>"></script>
 <script src="<?php echo base_url('assets\js\coordinador\coordinador.js'); ?>"></script>
