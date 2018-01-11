@@ -18,7 +18,7 @@ function Estadisticas(){
   that_estadisticas.controlador = "Estadisticas";
 
   this.get_datos = function(tipo){
-    var ruta = base_url+that_estadisticas.controlador+"/get_xatendio";
+    var ruta = base_url+that_estadisticas.controlador+"/get_datos";
     $.ajax({
       async: true,
       url: ruta,

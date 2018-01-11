@@ -64,8 +64,8 @@ body{
               <!-- <label for="estadisticas_tipo">Seleccione</label> -->
               <select id="estadisticas_tipo" name="" class="form-control">
                 <option value="0"> Seleccione </option>
-                <option value="1"> Atendio </option>
-                <option value="2"> otro </option>
+                <option value="1"> Quién atendió </option>
+                <option value="2">  Preguntas SI y NO </option>
               </select>
             </div>
         </div>
