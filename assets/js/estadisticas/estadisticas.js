@@ -1,6 +1,6 @@
 $(function() {
   google.charts.load('current', {'packages':['bar']});
-
+  google.charts.load("current", {packages:['corechart']});
 
   // obj_message = new Message();
   // obj_coordinador = new Coordinador();
@@ -51,29 +51,35 @@ function Estadisticas(){
 
 
 
+
+
 function drawChart(arr_datos) {
-var total = arr_datos.total;
-var tdirectores = arr_datos.tdirectores;
-var tdocentes = arr_datos.tdocentes;
+      console.log(arr_datos);
+      var total = arr_datos.total;
+      var tdirectores = (parseInt(arr_datos.tdirectores)*100/parseInt(total));
+      var tdocentes = (parseInt(arr_datos.tdocentes)*100/parseInt(total));
+      var data = google.visualization.arrayToDataTable([
+        ["Questionario", "", { role: "style" }, {role:'annotation'} ],
+        ["Docentes", parseInt(tdocentes), "#1b9e77", "%"],
+        ["Directores", parseInt(tdirectores), "#d95f02", "%"]
+      ]);
 
-  var data = google.visualization.arrayToDataTable([
-    [total+' :)', 'Docentes', 'Directores'],
-    ['Porcentaje encuestas docentes y directores', (tdocentes*100)/total, (tdirectores*100)/total]
-  ]);
+      var view = new google.visualization.DataView(data);
+      view.setColumns([0, 1,
+                       { calc: "stringify",
+                         sourceColumn: 1,
+                         type: "string",
+                         role: "annotation" },
+                       2]);
 
-  var options = {
-    chart: {
-      title: 'Porcentajes de encuestas aplicadas a docentes y directivos',
-      subtitle: ""
-    },
-    bars: 'vertical',
-    vAxis: {format: '#\'%\''},
-    height: 400,
-    colors: ['#1b9e77', '#d95f02', '#7570b3'],
-    bar: { groupWidth: "40%" }
-  };
-
-  var chart = new google.charts.Bar(document.getElementById('chart_div'));
-
-  chart.draw(data, google.charts.Bar.convertOptions(options));
-}
+      var options = {
+        title: "Porcentajes de encuestas aplicadas a docentes y directivos",
+        width: "100%",
+        height: 400,
+        vAxis: {format: '#\'%\''},
+        bar: {groupWidth: "100%"},
+        legend: { position: "none" },
+      };
+      var chart = new google.visualization.ColumnChart(document.getElementById("chart_div"));
+      chart.draw(view, options);
+  }
