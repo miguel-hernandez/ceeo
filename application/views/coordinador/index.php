@@ -60,7 +60,7 @@ body{
       <div class="modal-body">
 
         <div class="row ">
-            <div class='col-xs-12'>
+            <div class='col-xs-8 col-xs-8 col-md-10 col-lg-10'>
               <!-- <label for="estadisticas_tipo">Seleccione</label> -->
               <select id="estadisticas_tipo" name="" class="form-control">
                 <option value="0"> Seleccione </option>
@@ -68,13 +68,11 @@ body{
                 <option value="2">  Preguntas SI y NO </option>
               </select>
             </div>
-        </div>
-
-        <div class="row margintop10">
-            <div class='col-xs-12'>
+            <div class='col-xs-4 col-xs-4 col-md-2 col-lg-2'>
               <button id="estadisticas_mostrar" name="" class="btn btn-primary btn-block">Mostrar</button>
             </div>
         </div>
+
 
 
         <div class="row margintop10">

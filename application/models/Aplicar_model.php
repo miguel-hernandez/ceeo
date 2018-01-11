@@ -6,6 +6,15 @@ class Aplicar_model extends CI_Model {
         parent::__construct();
         date_default_timezone_set(ZONAHORARIA);
     }
+    function get_aplicadasxatendio()
+    {
+       $str_query = " SELECT COUNT(*) AS total
+                      FROM aplicar ap
+                      WHERE ap.atendio=2 # 2 es atendió docente
+                    ";
+
+      return $this->db->query($str_query)->result_array();
+    }// get_encuestasaplicadas()
 
      function get_visitadas($idvisitador)
      {
