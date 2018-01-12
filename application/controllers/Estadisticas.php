@@ -71,46 +71,34 @@ class Estadisticas extends CI_Controller {
 
     $idpregunta = 0;
     $arr_finalfinal = array();
-
     $arr_final = array();
-    $arr_aux = array();
-    // echo "<pre>"; print_r($arr_datos); die();
+    $array_aux = array();
+    $arr_idp = array();
     foreach ($arr_datos as $item) {
-
-      // echo "<pre>"; print_r($item);
-      // echo "\n";
-      // echo $idpregunta;
-      // echo "\n";
-      // echo $item["idpregunta"];
-      // echo "\n";
-      // echo "\n";
-      if( $idpregunta != $item["idpregunta"] ){
+      if( $idpregunta == $item["idpregunta"] ){
+      }elseif ($idpregunta != $item["idpregunta"]) {
         $idpregunta = $item["idpregunta"];
-        // echo "\n diferente  ";
-        array_push($arr_final,$arr_aux);
-        $arr_aux = array();
-        array_push($arr_aux,$item);
-
-      }elseif ($idpregunta === $item["idpregunta"]) {
-        // echo "igual  ";
-        array_push($arr_aux,$item);
-        // $idpregunta = $item["idpregunta"];
+        array_push($arr_idp, $item["idpregunta"]);
       }
-
     }
 
-
-    // echo "<pre>"; print_r($arr_final); die();
+    for($i=0;$i<count($arr_idp); $i++) {
+        $idpregunta = $arr_idp[$i];
+        foreach ($arr_datos as $item) {
+          $idpregunta2 = $item["idpregunta"];
+          if($idpregunta==$idpregunta2){
+            array_push($array_aux,$item);
+          }
+        }
+        array_push($arr_final, $array_aux);
+        $array_aux = array();
+    }
 
     // Contamos Si y no
     $nsi = 0;
     $nno = 0;
     $arr_finalfinal = array();
     array_push($arr_finalfinal,  array());
-    // LA posición 0 tiene un array vacío
-
-    unset($arr_final[0]);
-    // echo "<pre>"; print_r($arr_final); die();
 
     foreach ($arr_final as $item) {
       $arr_aux2 = array();
@@ -124,43 +112,18 @@ class Estadisticas extends CI_Controller {
                 $nsi++;
               }
       }
-      // Armamos el array final
-      /*
-      $arr_aux2 = array(
-                        // "idpregunta"=>$item[0]["idpregunta"],
-                        // "npregunta"=>$item[0]["npregunta"],
-                        "pregunta"=>$item[0]["pregunta"],
-                        "nsi"=>$nsi,
-                        "nno"=>$nno
-                        );
-                        */
-
 
         array_push($arr_aux2, $item[0]["pregunta"]);
         array_push($arr_aux2, (($nsi*100)/$total_aplicadas));
         array_push($arr_aux2, (($nno*100)/$total_aplicadas));
 
-        // $arr_aux2 =  (array)$arr_aux2;
         array_push($arr_finalfinal, $arr_aux2);
 
     }
 
-
-
     $arr_return = array("datos" => $arr_finalfinal, "totalaplicadas"=>$total_aplicadas);
 
     return $arr_return;
-
-    // echo "<pre>"; print_r($arr_finalfinal); die();
-    //
-    //
-    // $total_preguntas = count($arr_finalfinal);
-    // // echo $total_preguntas; die();
-    // $cien_porciento = $total_aplicadas*$total_preguntas;
-    // // echo "<pre>"; print_r($result[0]["total"]); die();
-    // echo $cien_porciento; die();
-    // echo "<pre>"; print_r($arr_finalfinal); die();
-    //
   }// arma_xtipopregunta()
 
 
