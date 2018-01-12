@@ -83,6 +83,7 @@ body{
 
         <div class="row margintop10">
             <div class='col-xs-12'>
+              <center><label id="title_graph_line" class="title_chart"></label></center>
               <div class="box_graph" id="contenedor1" hidden>
                 <div id="chart_div"></div>
               </div>
@@ -91,6 +92,7 @@ body{
 
         <div class="row margintop10">
             <div class='col-xs-12'>
+              <center><label id="title_graph_line2" class="title_chart"></label></center>
               <div class="box_graph" id="contenedor2" hidden>
                 <div id="chart_div_2"></div>
               </div>

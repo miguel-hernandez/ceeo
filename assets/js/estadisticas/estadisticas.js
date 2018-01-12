@@ -15,6 +15,8 @@ $("#estadisticas_tipo" ).change(function() {
   $("#chart_div").empty();
   $("#contenedor1").hide();
   $("#contenedor2").hide();
+  $("#title_graph_line").text("");
+  $("#title_graph_line2").text("");
 });
 
 
@@ -95,6 +97,8 @@ function drawChart(arr_datos) {
   function drawChart_2(arr_datos) {
     $("#contenedor1").show();
   $("#contenedor2").show();
+  $("#title_graph_line").text("");
+  $("#title_graph_line").text("Porcentaje de evaluación preguntas docente del tipo SI, NO");
     // console.info(arr_datos);
     var datos = arr_datos["datos"];
     // datos[0] = ['Titulo', 'Requiere apoyo', {role:'annotation'}, 'En proceso', {role:'annotation'}];
@@ -105,7 +109,7 @@ function drawChart(arr_datos) {
         var options = {
           width:"100%",
           height:350,
-            title: 'Porcentages de evaluacion preguntas del tipo SI, NO',
+            // title: 'Porcentages de evaluacion preguntas del tipo SI, NO',
             // chartArea: {width: '50%'},
             chartArea:{ left:350,right:10,bottom:50,top:22 },
             isStacked: true,
@@ -128,20 +132,17 @@ function drawChart(arr_datos) {
 
 
     function drawChart_3(arr_datos) {
+      $("#title_graph_line2").text("Porcentaje de evaluación preguntas director del tipo SI, NO");
       var datos = arr_datos["datos"];
       datos[0] = ['Pregunta', 'SI', "NO"];
 
           var data = google.visualization.arrayToDataTable(datos);
 
           var options = {
-            chart: {
-            title: 'Company Performance',
-            subtitle: 'Sales, Expenses, and Profit: 2014-2017',
-          },
             width:"100%",
             height:350,
             titlePosition: 'in',
-              title: 'Porcentages de evaluacion preguntas del tipo SI, NO DIRECTIVOS',
+              // title: 'Porcentages de evaluacion preguntas del tipo SI, NO DIRECTIVOS',
               chartArea:{ left:350,right:10,bottom:50,top:22 },
               isStacked: true,
               legend: { position: 'bottom', maxLines: 3, alignment: 'center' },
