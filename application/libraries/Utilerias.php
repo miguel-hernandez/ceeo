@@ -12,6 +12,10 @@ define('MESSAGEREQUEST', 'message_request');
 define('SUCCESMESSAGE', '1');
 define('ERRORMESSAGE', '2');
 
+// IDs de tipo aplicar encuesta
+define('TADIRECTOR', 1);
+define('TADOCENTE', 2);
+
 class Utilerias{
 		public function __construct() {
 	        //  require_once APPPATH.'third_party/Utils.php';

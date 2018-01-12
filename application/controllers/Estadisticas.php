@@ -30,11 +30,13 @@ class Estadisticas extends CI_Controller {
         // comentario
           $usuario = $this->session->userdata[DATOSUSUARIO];
           $idcoordinador = $usuario["idusuario"];
-          $result = $this->Estadisticas_model->get_xtipopregunta($idcoordinador);
+          $result_pdocente = $this->Estadisticas_model->get_xtipopregunta($idcoordinador, TADOCENTE);
+          $result_pdirecor = $this->Estadisticas_model->get_xtipopregunta($idcoordinador, TADIRECTOR);
           // echo "<pre>"; print_r($result); die();
-          $arr = $this->arma_xtipopregunta($result);
+          $arr = $this->arma_xtipopregunta($result_pdirecor);
           $response = array(
-            "result" => $arr
+            "result_pdocente" => $result_pdocente,
+            "result_pdirector" => $result_pdirecor
           );
           // echo "<pre>"; print_r($arr); die();
         break;
