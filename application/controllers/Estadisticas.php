@@ -27,6 +27,7 @@ class Estadisticas extends CI_Controller {
           );
         break;
         case '2':
+        // comentario
           $usuario = $this->session->userdata[DATOSUSUARIO];
           $idcoordinador = $usuario["idusuario"];
           $result = $this->Estadisticas_model->get_xtipopregunta($idcoordinador);
