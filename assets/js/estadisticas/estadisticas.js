@@ -1,6 +1,7 @@
 $(function() {
-  google.charts.load('current', {'packages':['bar']});
-  google.charts.load("current", {packages:['corechart']});
+  // google.charts.load('current', {'packages':['bar']});
+  // google.charts.load("current", {packages:['corechart']});
+  google.charts.load('current', {packages: ['corechart', 'bar']});
 
   // obj_message = new Message();
   // obj_coordinador = new Coordinador();
@@ -98,25 +99,48 @@ function drawChart(arr_datos) {
       // var tdocentes = (parseInt(arr_datos.tdocentes)*100/parseInt(arr_datos["totalaplicadas"]));
 
         var data = google.visualization.arrayToDataTable(datos);
+        // var options = {
+        //   width:"100%",
+        //   height:350,
+        //   legend:{  position:'bottom'},
+        //   bar: { groupWidth:'50%' },
+        //   isStacked:true,
+        //   colors:['#5FB404', '#FAAC58'],
+
+        //   // title:title_chart,
+        //   titleTextStyle:{
+        //     color:'#073F7F',
+        //     fontSize:18
+        //   },
+        //   vAxis:{
+        //     format:'#\'%\''
+        //   },
+        //   chartArea:{ left:50,right:50,bottom:50,top:22 }
+        // };
+
         var options = {
           width:"100%",
           height:350,
-          legend:{  position:'bottom'},
-          bar: { groupWidth:'50%' },
-          isStacked:true,
-          colors:['#5FB404', '#FAAC58'],
-
-          // title:title_chart,
-          titleTextStyle:{
-            color:'#073F7F',
-            fontSize:18
-          },
-          vAxis:{
-            format:'#\'%\''
-          },
-          chartArea:{ left:50,right:50,bottom:50,top:22 }
-        };
-        var chart = new google.visualization.ColumnChart(document.getElementById('chart_div'));
-        chart.draw(data, options);
+            title: 'Porcentages de evaluacion preguntas del tipo SI, NO',
+            // chartArea: {width: '50%'},
+            chartArea:{ left:350,right:10,bottom:50,top:22 },
+            isStacked: true,
+            legend: { position: 'bottom', maxLines: 3, alignment: 'center' },
+             bar: { groupWidth:20 },
+            hAxis: {
+              title: 'Respuestas SI, NO',
+              minValue: 0,
+            },
+            vAxis: {
+              format:'#\'%\'',
+              title: 'City',
+              textPosition: 'out',
+              titleTextStyle: {width: 200}
+            },
+          };
+        // var chart = new google.visualization.ColumnChart(document.getElementById('chart_div'));
+        // chart.draw(data, options);
+        var chart = new google.visualization.BarChart(document.getElementById('chart_div'));
+      chart.draw(data, options);
 
     }
