@@ -19,9 +19,9 @@ class Estadisticas_model extends CI_Model {
        return $this->db->query($str_query)->result_array();
      }// get_xatendio()
 
-     function get_xtipopregunta($idcoordinador)
+     function get_xtipopregunta($idcoordinador, $idtipoaplicar)
      {
-      // Tipo de pregunta 1 es SI o NO
+      // Tipo de pregunta SI o NO
        $str_query = " SELECT a.idaplicar, a.atendio, p.idpregunta, r.respuesta, cv.idvisitador, p.pregunta, p.npregunta, IF(a.atendio='1', 'DIRECTOR', 'DOCENTE') AS atendio
                       FROM coord_visit cv
                       INNER JOIN aplicar a ON a.idusuario = cv.idvisitador
@@ -29,7 +29,7 @@ class Estadisticas_model extends CI_Model {
                       INNER JOIN pregunta p ON p.idpregunta = r.idpregunta
                       INNER JOIN encuesta e ON e.idencuesta = p.idencuesta
 
-                      WHERE cv.idcoordinador = {$idcoordinador} AND p.idtipopregunta=1 AND e.idtipoaplicar = 2 #1 es encuesta para director, 2 es docente
+                      WHERE cv.idcoordinador = {$idcoordinador} AND p.idtipopregunta=1 AND e.idtipoaplicar = {$idtipoaplicar} #1 es encuesta para director, 2 es docente
                       ORDER BY p.idpregunta
                       ";
           // echo $str_query; die();
