@@ -40,7 +40,8 @@ function Estadisticas(){
           drawChart(arr_datos);
         break;
         case "2":
-          drawChart_2(arr_datos);
+          drawChart_2(arr_datos["result_pdocente"]);
+          drawChart_3(arr_datos["result_pdirector"]);
         break;
 
 
@@ -144,3 +145,35 @@ function drawChart(arr_datos) {
       chart.draw(data, options);
 
     }
+
+
+    function drawChart_3(arr_datos) {
+      var datos = arr_datos["datos"];
+      datos[0] = ['Pregunta', 'SI', "NO"];
+
+          var data = google.visualization.arrayToDataTable(datos);
+
+          var options = {
+            width:"100%",
+            height:350,
+              title: 'Porcentages de evaluacion preguntas del tipo SI, NO DIRECTIVOS',
+              chartArea:{ left:350,right:10,bottom:50,top:22 },
+              isStacked: true,
+              legend: { position: 'bottom', maxLines: 3, alignment: 'center' },
+               bar: { groupWidth:20 },
+              hAxis: {
+                title: 'Respuestas SI, NO',
+                minValue: 0,
+              },
+              vAxis: {
+                format:'#\'%\'',
+                title: 'City',
+                textPosition: 'out',
+                titleTextStyle: {width: 200}
+              },
+            };
+
+          var chart = new google.visualization.BarChart(document.getElementById('chart_div_2'));
+        chart.draw(data, options);
+
+      }

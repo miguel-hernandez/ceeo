@@ -9,7 +9,9 @@ class Estadisticas extends CI_Controller {
         $this->load->helper('form');
         $this->load->model('Estadisticas_model');
         $this->load->model('Aplicar_model');
+        $this->load->model('Coordinador_model');
     }
+
 
 
 
@@ -17,26 +19,40 @@ class Estadisticas extends CI_Controller {
     function get_datos(){
     if(Utilerias::verifica_sesion_redirige($this)){
 
-      // $usuario = $this->session->userdata[DATOSUSUARIO];
+      $usuario = $this->session->userdata[DATOSUSUARIO];
+
+      $visitadores = "";
+      if($usuario["idtipousuario"] == UCOORDINADOR){ // corrdinador es 2 en las constantes de Utilerias
+          $result = $this->Coordinador_model->get_visitadores($usuario["idusuario"]);
+          foreach ($result as $item) {
+            $visitadores .= $item["idvisitador"].',';
+          }
+          $visitadores = substr($visitadores, 0, -1);
+      }
+
       $tipo = $this->input->post('tipo');
       switch ($tipo) {
         case '1':
-          $result = $this->Estadisticas_model->get_xatendio();
+          $result = $this->Estadisticas_model->get_xatendio($visitadores);
           $response = array(
             "result" => $result[0]
           );
         break;
         case '2':
         // comentario
-          $usuario = $this->session->userdata[DATOSUSUARIO];
+
           $idcoordinador = $usuario["idusuario"];
           $result_pdocente = $this->Estadisticas_model->get_xtipopregunta($idcoordinador, TADOCENTE);
           $result_pdirecor = $this->Estadisticas_model->get_xtipopregunta($idcoordinador, TADIRECTOR);
           // echo "<pre>"; print_r($result); die();
-          $arr = $this->arma_xtipopregunta($result_pdirecor);
+          $arr_pdirector = $this->arma_xtipopregunta($result_pdirecor);
+          $arr_pdocente = $this->arma_xtipopregunta($result_pdocente);
+          $result = array(
+            "result_pdocente" => $arr_pdocente,
+            "result_pdirector" => $arr_pdirector
+          );
           $response = array(
-            "result_pdocente" => $result_pdocente,
-            "result_pdirector" => $result_pdirecor
+            "result" => $result
           );
           // echo "<pre>"; print_r($arr); die();
         break;

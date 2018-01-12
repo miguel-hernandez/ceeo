@@ -6,14 +6,14 @@ class Estadisticas_model extends CI_Model {
         parent::__construct();
     }
 
-     function get_xatendio()
+     function get_xatendio($visitadores)
      {
        $str_query = " SELECT
                       SUM(CASE  WHEN atendio=1 THEN 1 ELSE 0 END) AS 'tdirectores',
                       SUM(CASE  WHEN atendio=2 THEN 1 ELSE 0 END) AS 'tdocentes',
                       count(atendio) AS total
                       FROM aplicar ap
-                      WHERE ap.idusuario IN (1,2)
+                      WHERE ap.idusuario IN ('{$visitadores}')
                       ";
           // echo $str_query; die();
        return $this->db->query($str_query)->result_array();

@@ -81,6 +81,11 @@ body{
             </div>
         </div>
 
+        <div class="row margintop10">
+            <div class='col-xs-12'>
+              <div id="chart_div_2"></div>
+            </div>
+        </div>
 
 
       </div><!-- modal-body -->
