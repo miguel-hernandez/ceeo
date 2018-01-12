@@ -5,6 +5,12 @@ body{
 .icono{
   width: 30px;
 }
+.box_graph{
+  border: 1px solid #ccc;
+  padding: 10px;
+  height: 450px;
+  /*border-radius: 8px;*/
+}
 </style>
 <input id="itxt_coordinador_id" name="itxt_coordinador_id" type="hidden"  value="<?= $id_coordinador; ?>">
 <div class="container-fluid">
@@ -77,13 +83,17 @@ body{
 
         <div class="row margintop10">
             <div class='col-xs-12'>
-              <div id="chart_div"></div>
+              <div class="box_graph" id="contenedor1" hidden>
+                <div id="chart_div"></div>
+              </div>
             </div>
         </div>
 
         <div class="row margintop10">
             <div class='col-xs-12'>
-              <div id="chart_div_2"></div>
+              <div class="box_graph" id="contenedor2" hidden>
+                <div id="chart_div_2"></div>
+              </div>
             </div>
         </div>
 

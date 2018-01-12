@@ -13,6 +13,8 @@ $(function() {
 
 $("#estadisticas_tipo" ).change(function() {
   $("#chart_div").empty();
+  $("#contenedor1").hide();
+  $("#contenedor2").hide();
 });
 
 
@@ -59,6 +61,7 @@ function Estadisticas(){
 
 
 function drawChart(arr_datos) {
+  $("#contenedor1").show();
       console.log(arr_datos);
       var total = arr_datos.total;
       var tdirectores = (parseInt(arr_datos.tdirectores)*100/parseInt(total));
@@ -90,35 +93,15 @@ function drawChart(arr_datos) {
   }
 
   function drawChart_2(arr_datos) {
+    $("#contenedor1").show();
+  $("#contenedor2").show();
     // console.info(arr_datos);
     var datos = arr_datos["datos"];
     // datos[0] = ['Titulo', 'Requiere apoyo', {role:'annotation'}, 'En proceso', {role:'annotation'}];
     datos[0] = ['Pregunta', 'SI', "NO"];
     // console.info(datos);
     // return false;
-
-      // var tdocentes = (parseInt(arr_datos.tdocentes)*100/parseInt(arr_datos["totalaplicadas"]));
-
         var data = google.visualization.arrayToDataTable(datos);
-        // var options = {
-        //   width:"100%",
-        //   height:350,
-        //   legend:{  position:'bottom'},
-        //   bar: { groupWidth:'50%' },
-        //   isStacked:true,
-        //   colors:['#5FB404', '#FAAC58'],
-
-        //   // title:title_chart,
-        //   titleTextStyle:{
-        //     color:'#073F7F',
-        //     fontSize:18
-        //   },
-        //   vAxis:{
-        //     format:'#\'%\''
-        //   },
-        //   chartArea:{ left:50,right:50,bottom:50,top:22 }
-        // };
-
         var options = {
           width:"100%",
           height:350,
@@ -134,13 +117,10 @@ function drawChart(arr_datos) {
             },
             vAxis: {
               format:'#\'%\'',
-              title: 'City',
               textPosition: 'out',
-              titleTextStyle: {width: 200}
+              titleTextStyle: {width: 400}
             },
           };
-        // var chart = new google.visualization.ColumnChart(document.getElementById('chart_div'));
-        // chart.draw(data, options);
         var chart = new google.visualization.BarChart(document.getElementById('chart_div'));
       chart.draw(data, options);
 
@@ -154,8 +134,13 @@ function drawChart(arr_datos) {
           var data = google.visualization.arrayToDataTable(datos);
 
           var options = {
+            chart: {
+            title: 'Company Performance',
+            subtitle: 'Sales, Expenses, and Profit: 2014-2017',
+          },
             width:"100%",
             height:350,
+            titlePosition: 'in',
               title: 'Porcentages de evaluacion preguntas del tipo SI, NO DIRECTIVOS',
               chartArea:{ left:350,right:10,bottom:50,top:22 },
               isStacked: true,
@@ -167,9 +152,11 @@ function drawChart(arr_datos) {
               },
               vAxis: {
                 format:'#\'%\'',
-                title: 'City',
                 textPosition: 'out',
-                titleTextStyle: {width: 200}
+                titleTextStyle: { color: "#d95f02",
+                                  fontSize: 18,
+                                  bold: true,
+                                  italic: true },
               },
             };
 
