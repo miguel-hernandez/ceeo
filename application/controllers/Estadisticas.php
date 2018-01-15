@@ -45,8 +45,8 @@ class Estadisticas extends CI_Controller {
           $result_pdocente = $this->Estadisticas_model->get_xtipopregunta($idcoordinador, TADOCENTE);
           $result_pdirecor = $this->Estadisticas_model->get_xtipopregunta($idcoordinador, TADIRECTOR);
           // echo "<pre>"; print_r($result); die();
-          $arr_pdirector = $this->arma_xtipopregunta($result_pdirecor);
-          $arr_pdocente = $this->arma_xtipopregunta($result_pdocente);
+          $arr_pdirector = $this->arma_xtipopregunta($result_pdirecor, 1);
+          $arr_pdocente = $this->arma_xtipopregunta($result_pdocente, 2);
           $result = array(
             "result_pdocente" => $arr_pdocente,
             "result_pdirector" => $arr_pdirector
@@ -64,9 +64,9 @@ class Estadisticas extends CI_Controller {
     }
   }// get_datos()
 
-  function arma_xtipopregunta($arr_datos){
+  function arma_xtipopregunta($arr_datos, $atendio){
 
-    $result = $this->Aplicar_model->get_aplicadasxatendio();
+    $result = $this->Aplicar_model->get_aplicadasxatendio($atendio); // Docente
     $total_aplicadas = $result[0]["total"];
 
     $idpregunta = 0;
