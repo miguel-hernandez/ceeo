@@ -116,7 +116,7 @@ function drawChart(arr_datos) {
             legend: { position: 'bottom', maxLines: 3, alignment: 'center' },
              bar: { groupWidth:20 },
             hAxis: {
-              title: 'Respuestas SI, NO',
+              // title: 'Respuestas SI, NO',
               minValue: 0,
             },
             vAxis: {
@@ -148,7 +148,7 @@ function drawChart(arr_datos) {
               legend: { position: 'bottom', maxLines: 3, alignment: 'center' },
                bar: { groupWidth:20 },
               hAxis: {
-                title: 'Respuestas SI, NO',
+                // title: 'Respuestas SI, NO',
                 minValue: 0,
               },
               vAxis: {
